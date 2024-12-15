@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Models;
+
+use App\DB;
+
+class OrderItem extends DB
+{
+    public $table = "`order_item`";
+
+    public $amount;
+    public $quantity;
+    public $order_id;
+    public $product_id;
+
+    public function create()
+    {
+
+        $sql = "INSERT INTO {$this->table}
+        (amount, quantity, order_id,product_id)
+        VALUES (?,?,?,?)";
+
+        $stmt = $this->conn()->prepare($sql);
+
+        // Bind parameters (adjust the types accordingly: "s" for string, "i" for integer, "d" for double/float)
+        $stmt->bind_param(
+            "ssss",
+            $this->amount,
+            $this->quantity,
+            $this->order_id,
+            $this->product_id,
+        );
+
+        if ($stmt->execute()) {
+            return $stmt->insert_id;
+        } else {
+            throw new \Exception("Error executing query: " . $stmt->error);
+        }
+    }
+
+    public function getByOrder($order_id)
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE order_id='$order_id'";
+        $result = $this->query($sql);
+        if ($result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
+    }
+}
