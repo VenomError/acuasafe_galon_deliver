@@ -31,3 +31,8 @@ if (!function_exists("get_url")) {
         return $url;
     }
 }
+
+function default_img_product($num = 4)
+{
+    return "assets/images/resource/shop/shop-$num.jpg";
+}

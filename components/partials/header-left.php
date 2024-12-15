@@ -7,4 +7,4 @@
 </li> -->
 <li><a href="/">Home</a></li>
 <li><a href="/contact">Kontak</a></li>
-<li><a href="/shop">Shop</a></li>
+<li><a href="/product">Product</a></li>

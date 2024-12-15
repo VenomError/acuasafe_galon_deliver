@@ -1,10 +1,14 @@
 <?php
+
+use App\Models\Metadata;
+
 session_start();
 require_once __DIR__ . "/../vendor/autoload.php";
 
+$metadata = new Metadata();
 // get depot lat and long
-$latitudeTo = -5.1676832;
-$longitudeTo = 114.4524672;
+$latitudeTo = $metadata->get('office_latitude');
+$longitudeTo = $metadata->get('office_longitude');
 
 // Ambil data dari request
 $input = json_decode(file_get_contents('php://input'), true);

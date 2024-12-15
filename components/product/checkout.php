@@ -74,6 +74,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col-lg-6 col-md-12 col-sm-12 right-column">
                     <div class="inner-box">
                         <div class="order-info">
@@ -142,53 +144,139 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="mapDirection" style="height: 500px;"></div>
+                </div>
             </div>
         </div>
     </form>
 
 </section>
 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<?php
+
+use App\Models\Metadata;
+
+$metadata = new Metadata();
+$latitudeFrom = (float) $metadata->get('office_latitude');
+$longitudeFrom = (float) $metadata->get('office_longitude');
+
+?>
+
+<style>
+    /* Mengubah warna latar belakang dan teks popup */
+    .leaflet-popup-content-wrapper {
+        background-color: #4A90E2;
+        /* Warna latar belakang popup */
+        color: #fff;
+        /* Warna teks popup */
+        border-radius: 8px;
+        /* Membuat sudut popup lebih membulat */
+    }
+
+    /* Mengubah warna panah (arrow) popup */
+    .leaflet-popup-tip {
+        background-color: #4A90E2;
+        /* Warna panah popup */
+    }
+
+    /* Mengubah warna tautan di dalam popup jika ada */
+    .leaflet-popup-content a {
+        color: #FFD700;
+        /* Warna tautan popup */
+    }
+</style>
+
 <script>
-    const x = document.getElementById("failedGetLocation");
+    const map = L.map('mapDirection').setView([<?= $latitudeFrom ?>, <?= $longitudeFrom ?>], 13);
+    const acuasfeMarker = L.marker([<?= $latitudeFrom ?>, <?= $longitudeFrom ?>]).addTo(map)
+        .bindPopup('<center><b>ACUASFE</b></center><span><br>Lokasi office acusafe</span>').openPopup();
+    // Menambahkan Tile Layer dari OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
+    // Elemen untuk input dan tombol
+    const latitude = document.getElementById('latitude');
+    const longitude = document.getElementById('longitude');
+    const distance = document.getElementById('distance');
     const submitBtn = document.getElementById('submitButton');
+    const failedGetLocation = document.getElementById("failedGetLocation");
 
+    let marker; // Menyimpan marker global
+    let routingControl; // Menyimpan kontrol routing global
+
+    // Fungsi untuk memeriksa apakah field latitude dan longitude terisi
     function checkFields() {
         if (latitude.value !== "" && longitude.value !== "") {
             submitBtn.setAttribute('type', 'submit');
+            submitBtn.disabled = false;
         } else {
-            toastr.warning('dapatkan lokasi anda terlebih dahulu');
+            toastr.warning('Dapatkan lokasi Anda terlebih dahulu');
             submitBtn.setAttribute('type', 'button');
             submitBtn.disabled = true;
         }
     }
 
-    const latitude = document.getElementById('latitude');
-    const longitude = document.getElementById('longitude');
-    const distance = document.getElementById('distance');
-
+    // Fungsi untuk mendapatkan lokasi pengguna
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
         } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
+            failedGetLocation.innerHTML = "Geolocation tidak didukung oleh browser ini.";
         }
-
     }
 
+    // Fungsi untuk menangani posisi pengguna
     function showPosition(position) {
+        const userLat = position.coords.latitude;
+        const userLng = position.coords.longitude;
 
-        latitude.value = position.coords.latitude;
-        longitude.value = position.coords.longitude;
+        latitude.value = userLat;
+        longitude.value = userLng;
         checkFields();
+
+        // Jika marker belum ada, buat marker baru, jika sudah ada, perbarui posisinya
+        if (!marker) {
+            const marker = L.marker([userLat, userLng], {
+                    draggable: true
+                }).addTo(map)
+                .bindPopup('Lokasi Anda', {
+                    autoPan: false
+                })
+                .openPopup();
+            // Update latitude dan longitude saat marker dipindah
+            marker.on('dragend', function(e) {
+                const latLng = e.target.getLatLng();
+                latitude.value = latLng.lat;
+                longitude.value = latLng.lng;
+                checkFields();
+                updateRoute(latLng.lat, latLng.lng);
+            });
+        } else {
+            marker.setLatLng([userLat, userLng]); // Perbarui posisi marker
+        }
+
+        // Update rute setiap kali posisi marker berubah
+        updateRoute(userLat, userLng);
+
+        // Hitung jarak dengan fetch API
         fetch('/action/getDistance.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
+                    latitude: userLat,
+                    longitude: userLng
                 })
             })
             .then(response => response.json())
@@ -198,6 +286,40 @@
             .catch(error => {
                 toastr.error(error, 'Error');
             });
+    }
 
+    // Fungsi untuk menangani error geolokasi
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                failedGetLocation.innerHTML = "Pengguna menolak permintaan geolokasi.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                failedGetLocation.innerHTML = "Informasi lokasi tidak tersedia.";
+                break;
+            case error.TIMEOUT:
+                failedGetLocation.innerHTML = "Permintaan lokasi timeout.";
+                break;
+            case error.UNKNOWN_ERROR:
+                failedGetLocation.innerHTML = "Terjadi kesalahan yang tidak diketahui.";
+                break;
+        }
+    }
+
+    // Fungsi untuk memperbarui rute ketika marker dipindahkan
+    function updateRoute(lat, lng) {
+        // Hapus rute lama
+        if (routingControl) {
+            map.removeControl(routingControl);
+        }
+
+        // Tambahkan rute baru
+        routingControl = L.Routing.control({
+            waypoints: [
+                L.latLng(<?= $latitudeFrom ?>, <?= $longitudeFrom ?>), // Titik awal
+                L.latLng(lat, lng) // Lokasi baru dari marker yang dipindah
+            ],
+            routeWhileDragging: true
+        }).addTo(map);
     }
 </script>

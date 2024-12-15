@@ -8,7 +8,7 @@ try {
         'name' => post()->name,
         'image' => post()->image,
         'price' => number_format(post()->price, 2),
-        'quantity' => 1
+        'quantity' => post()->quantity ?? 1,
     ];
     $_SESSION['cart'][post()->product_id] = $data;
 
