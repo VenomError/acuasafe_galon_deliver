@@ -1,9 +1,9 @@
 <?php
 
 
-function set_auth($data)
+function set_auth($data, $name = 'auth')
 {
-    $_SESSION['auth'] = $data;
+    $_SESSION[$name] = $data;
 }
 
 function auth()
@@ -49,11 +49,41 @@ function guest_only()
 
     if (auth_check()) {
         return redirect('/');
+    } else if (admin_check()) {
+        return redirect('/dashboard');
     } else {
         return true;
     }
 }
 
+
+// admin auth
+function admin()
+{
+    if (!is_null(session('admin'))) {
+        return session('admin');
+    } else {
+        return null;
+    }
+}
+function admin_check(): mixed
+{
+    if (!is_null(admin())) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function admin_only()
+{
+
+    if (admin_check()) {
+        return true;
+    } else {
+        return redirect('/dashboard/login');
+    }
+}
 
 function logout()
 {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admin;
 use App\Models\Metadata;
 
 require_once __DIR__ . "/vendor/autoload.php";
@@ -16,4 +17,15 @@ $metadata->set("office_close_info", "Sunday: Closed");
 $metadata->set("office_latitude", "-5.1375500");
 $metadata->set("office_longitude", "119.4866300");
 
-echo "seeding success";
+echo "seeding Metadata success";
+
+
+$admin = new Admin();
+
+$admin->name = "Wawan Julianto";
+$admin->email = "admin@gmail.com";
+$admin->password = "password";
+
+$admin->create();
+
+echo "Create Admin Success";
