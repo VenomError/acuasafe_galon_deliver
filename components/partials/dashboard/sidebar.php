@@ -36,6 +36,14 @@
         </li>
 
         <li class="side-nav-title"> Barang </li>
+
+        <li class="side-nav-item">
+            <a href="/dashboard/Product/create_product" class="side-nav-link">
+                <i class="  uil-streering"></i>
+                <span> Create Product </span>
+            </a>
+        </li>
+
         <li class="side-nav-item">
             <a href="/dashboard/Product/list_product" class="side-nav-link">
                 <i class="  uil-streering"></i>

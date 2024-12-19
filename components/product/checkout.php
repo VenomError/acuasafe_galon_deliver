@@ -145,11 +145,10 @@
                     </div>
                 </div>
 
-            </div>
-            <div class="row">
-                <div class="col-12">
+                <div class="col-12 mt-5">
                     <div id="mapDirection" style="height: 500px;"></div>
                 </div>
+
             </div>
         </div>
     </form>

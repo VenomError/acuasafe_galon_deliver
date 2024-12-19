@@ -49,7 +49,14 @@ function guest_only()
 
     if (auth_check()) {
         return redirect('/');
-    } else if (admin_check()) {
+    } else {
+        return true;
+    }
+}
+
+function guest_admin_only()
+{
+    if (admin_check()) {
         return redirect('/dashboard');
     } else {
         return true;

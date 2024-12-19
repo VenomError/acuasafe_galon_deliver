@@ -46,7 +46,13 @@ function uploadFile($inputName, $dir = '', $allowedTypes = ['jpg', 'jpeg', 'png'
 
     // Coba mengunggah file
     if (move_uploaded_file($_FILES[$inputName]["tmp_name"], $targetFile)) {
-        return $uniqueName;
+
+        $targetName = '/uploads/';
+        if (!empty($dir)) {
+            $targetName = $targetName . $dir . '/';
+        }
+
+        return $targetName . $uniqueName;
     } else {
         throw new Exception("Maaf, terjadi kesalahan saat mengunggah file.");
     }

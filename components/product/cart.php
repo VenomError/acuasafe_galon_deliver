@@ -59,7 +59,7 @@ if (request()->checkout) {
                                                     </button>
                                                 </form>
                                                 <div class="prod-thumb">
-                                                    <img src="assets/images/resource/shop/cart-1.jpg" alt="">
+                                                    <img src="<?= $cart['image'] ?>" alt="" width="100px">
                                                 </div>
                                                 <div class="prod-title">
                                                     <?= ucwords($cart['name']) ?>

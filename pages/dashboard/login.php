@@ -2,7 +2,7 @@
 
 set_layout('auth');
 set_title('Login Admin');
-guest_only();
+guest_admin_only();
 ?>
 
 <div class="card">

@@ -2,7 +2,6 @@
 set_layout("dashboard");
 set_title('List Product');
 
-
 ?>
 
 

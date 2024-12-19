@@ -12,31 +12,19 @@ $products = (new Produk)->query("SELECT * FROM product")
         <div class="sec-title">
             <h2>We Deliver Best Quality <br />Bottle Packs.</h2>
         </div>
-        <style>
-            .shop-block {
-                display: flex;
-            }
-
-            .shop-block .inner-box {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                height: 100%;
-            }
-        </style>
-        <div class="row clearfix ">
+        <div class="row clearfix  ">
             <?php foreach ($products as $product) : ?>
-                <div class="col-lg-4 col-md-6 col-sm-12 shop-block  ">
+                <div class="col-lg-4 col-md-6 col-sm-12 shop-block mb-4  ">
                     <div class="shop-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500m">
                         <div class="inner-box">
-                            <figure class="image-box"><img src="assets/images/resource/shop/shop-1.jpg" alt=""></figure>
+                            <figure class="image-box"><img src="<?= $product['image'] ?? '' ?>" alt="" width="400px"></figure>
                             <div class="lower-content">
                                 <div class="shape" style="background-image: url(assets/images/shape/shape-7.png);"></div>
                                 <span><?= $product['size'] ?></span>
                                 <h4><a href="/product_detail?product_id=<?= $product['id'] ?>"><?= ucwords($product['name']) ?></a></h4>
                                 <h6>Rp <?= number_format($product['price'], 2) ?></h6>
                                 <p>
-                                    <?= nl2br(htmlspecialchars($product['description'])) ?>
+                                    <?= $product['description'] ?>
                                 </p>
                                 <div class="btn-box">
                                     <form action="/action/addToCart.php" method="post">

@@ -31,7 +31,7 @@ $data = $products->all();
                     <?php foreach ($data as $product) : ?>
                         <tr>
                             <td>
-                                <img src="/<?= $product['image'] ?? '' ?>" alt="contact-img" title="product-img" class="rounded me-3" height="48" />
+                                <img src="<?= $product['image'] ?? '' ?>" alt="contact-img" title="product-img" class="rounded me-3" height="48" />
                                 <p class="m-0 d-inline-block align-middle font-16">
                                     <a href="/dashboard/product/detail" class="text-primary"><?= ucwords($product['name']) ?></a>
                                 </p>
