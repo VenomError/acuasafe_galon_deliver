@@ -18,6 +18,57 @@
                 <span> Dashboard </span>
             </a>
         </li>
+        <li class="side-nav-item">
+            <a href="/dashboard/order/list_order" class="side-nav-link">
+                <i class="  uil-streering"></i>
+                <span> Order </span>
+            </a>
+        </li>
+
+        <li class="side-nav-title"> Pesanan </li>
+        <?php
+        $order = new \App\Models\Order();
+        ?>
+
+        <li class="side-nav-item">
+            <?php
+            $orderCount = $order->joinCostumerWhereStatus('new')->num_rows;
+            ?>
+            <a href="/dashboard/order/new_order" class="side-nav-link">
+                <i class="  uil-streering"></i>
+                <span> New Order </span>
+                <span class="badge bg-info"><?= $orderCount ?></span>
+            </a>
+        </li>
+        <li class="side-nav-item">
+            <?php
+            $orderCount = $order->joinCostumerWhereStatus('otw')->num_rows;
+            ?>
+            <a href="/dashboard/order/otw_order" class="side-nav-link">
+                <i class="  uil-streering"></i>
+                <span> Otw Order </span>
+                <span class="badge bg-info"><?= $orderCount ?></span>
+            </a>
+        </li>
+        <li class="side-nav-item">
+            <?php
+            $orderCount = $order->joinCostumerWhereStatus('cancel')->num_rows;
+            ?>
+            <a href="/dashboard/order/canceled_order" class="side-nav-link">
+                <i class="  uil-streering"></i>
+                <span> Canceled Order </span>
+                <span class="badge bg-danger"><?= $orderCount ?></span>
+            </a>
+        </li>
+        <li class="side-nav-item">
+            <?php
+            $orderCount = $order->joinCostumerWhereStatus('cancel')->num_rows;
+            ?>
+            <a href="/dashboard/order/completed_order" class="side-nav-link">
+                <i class="  uil-streering"></i>
+                <span> Completed Order </span>
+            </a>
+        </li>
 
         <li class="side-nav-title">Pengguna</li>
 
@@ -50,13 +101,7 @@
             </a>
         </li>
 
-        <li class="side-nav-title"> Pesanan </li>
-        <li class="side-nav-item">
-            <a href="/dashboard/order/list_order" class="side-nav-link">
-                <i class="  uil-streering"></i>
-                <span> List Order </span>
-            </a>
-        </li>
+
 
     </ul>
     <!--- End Sidemenu -->

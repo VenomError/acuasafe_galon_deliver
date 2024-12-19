@@ -54,20 +54,57 @@ class Order extends DB
     public function uploadResit($order_id, $uploadName)
     {
         $sql = "UPDATE {$this->table} SET resit='$uploadName' WHERE id='$order_id'";
-        $result = $this->query($sql);
+        return $this->query($sql);
     }
 
     public function joinCostumer()
     {
-        return $this->query("
-            SELECT  
+        return $this->query("SELECT  
             {$this->table}.*,
              costumer.name  AS costumer_name,
              costumer.id  AS costumer_id
             FROM {$this->table}
             JOIN costumer ON {$this->table}.costumer_id=costumer.id
             ORDER BY distance
-         ")
-            ->fetch_all(MYSQLI_ASSOC);
+         ");
+    }
+
+    public function joinCostumerWhereStatus($status)
+    {
+        return $this->query("SELECT  
+            {$this->table}.*,
+             costumer.name  AS costumer_name,
+             costumer.id  AS costumer_id
+            FROM {$this->table}
+            JOIN costumer ON {$this->table}.costumer_id=costumer.id
+            WHERE status='$status'
+            ORDER BY distance
+         ");
+    }
+
+    public function findAndJoinCostumer($id)
+    {
+        return $this->query("SELECT  
+        {$this->table}.*,
+         costumer.id  AS costumer_id,
+         costumer.name  AS costumer_name,
+         costumer.email  AS costumer_email,
+         costumer.phone  AS costumer_phone
+        FROM {$this->table}
+        JOIN costumer ON {$this->table}.costumer_id=costumer.id
+        WHERE {$this->table}.id='$id'
+     ")->fetch_object();
+    }
+
+    public function delete($id)
+    {
+
+        return $this->query("DELETE FROM {$this->table} WHERE id='$id'");
+    }
+
+    public function assignDriver($order_id, $driver_id)
+    {
+        $sql = "UPDATE {$this->table} SET driver_id='$driver_id' WHERE id='$order_id'";
+        return   $this->query($sql);
     }
 }

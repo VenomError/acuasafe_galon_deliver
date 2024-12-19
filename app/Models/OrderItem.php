@@ -40,7 +40,13 @@ class OrderItem extends DB
 
     public function getByOrder($order_id)
     {
-        $sql = "SELECT * FROM {$this->table} WHERE order_id='$order_id'";
+        $sql = "SELECT 
+        order_item.*, 
+        product.name AS product_name ,
+        product.price AS product_price 
+        FROM {$this->table} 
+        JOIN product ON order_item.product_id = product.id
+        WHERE order_id = '$order_id'";
         $result = $this->query($sql);
         if ($result->num_rows > 0) {
             return $result->fetch_all(MYSQLI_ASSOC);

@@ -1,7 +1,7 @@
 <?php
 set_layout("dashboard");
 set_title('Edit Product');
-if (!isset($_GET['product_id']) && empty($_GET['product_id'])) {
+if (!isset($_GET['product_id']) || empty($_GET['product_id'])) {
     redirect('/dashboard/product/list_product');
 }
 

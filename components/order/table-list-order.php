@@ -1,29 +1,20 @@
 <?php
 
-use App\Models\Order;
 use App\Models\Driver;
 use App\Models\Metadata;
 
-$products = new Order();
+
 $drivers = new Driver();
 $metadata = new Metadata();
-$data = $products->joinCostumer();
 
 $latitudeFrom = $metadata->get('office_latitude');
 $longitudeFrom = $metadata->get('office_longitude');
 ?>
 <div class="card">
     <div class="card-body">
-        <div class="row mb-2">
-            <div class="col-sm-5">
-            </div>
-            <div class="col-sm-7 text-end">
-                <a href="/dashboard/product/create_product" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Product</a>
-            </div><!-- end col-->
-        </div>
 
         <div class="table-responsive">
-            <table class="table table-centered  nowrap" id="products-datatable">
+            <table class="table table-centered  nowrap" id="orders-datatable">
                 <thead class="table-light">
                     <tr>
                         <th></th>
@@ -64,9 +55,9 @@ $longitudeFrom = $metadata->get('office_longitude');
                                 <?php
                                 if (is_null($order['driver_id'])) :
                                 ?>
-                                    <button class="btn btn-success btn-sm"
+                                    <button class="btn btn-danger btn-sm"
                                         data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Assign Order to Driver">
-                                        <i class="mdi mdi-truck-delivery me-2"></i> assign
+                                        <i class="mdi mdi-truck-delivery me-2"></i> Not Assign
                                     </button>
                                 <?php
                                 else :
@@ -101,12 +92,12 @@ $longitudeFrom = $metadata->get('office_longitude');
 </div> <!-- end card-->
 
 <script>
-    function deleteProduct(id) {
+    function deleteOrder(id) {
         // Show a confirmation dialog
         if (confirm("Are you sure you want to delete this product? ")) {
             $.ajax({
                 type: "POST",
-                url: "/action/product/deleteProduct.php",
+                url: "/action/Order/deleteOrder.php",
                 data: {
                     id: id
                 },

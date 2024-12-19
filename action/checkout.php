@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         foreach ($products as $item) {
             $order_item = new OrderItem();
 
-            $order_item->amount = toFloat($item['price']);
+            $order_item->amount = toFloat($item['price']) * $item['quantity'];
             $order_item->quantity = $item['quantity'];
             $order_item->order_id = $order_id;
             $order_item->product_id = $item['id'];
