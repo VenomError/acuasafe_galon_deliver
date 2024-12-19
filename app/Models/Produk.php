@@ -42,4 +42,27 @@ class Produk extends DB
         )
         ");
     }
+    public function update($id)
+    {
+        // Ensure image is properly handled if not empty
+        $imageSql = !empty($this->image) ? ", image='{$this->image}'" : '';
+
+        // Update SQL query with the missing comma after the price field
+        $sql = "UPDATE {$this->table}
+                SET
+                name='{$this->name}',
+                size='{$this->size}',
+                description='{$this->description}',
+                price='{$this->price}'
+                {$imageSql}
+                WHERE id='$id'";
+
+        // Execute the query
+        return $this->query($sql);
+    }
+
+    public function delete($id)
+    {
+        return $this->query("DELETE FROM {$this->table} WHERE id='$id'");
+    }
 }

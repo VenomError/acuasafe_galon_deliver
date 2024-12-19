@@ -12,7 +12,7 @@ $data = $products->all();
             <div class="col-sm-5">
             </div>
             <div class="col-sm-7 text-end">
-                <a href="/dashboard/product/create_product" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Product</a>
+                <a href="/dashboard/product/create_product" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Product</a>
             </div><!-- end col-->
         </div>
 
@@ -49,9 +49,12 @@ $data = $products->all();
                             </td>
 
                             <td class="table-action">
-                                <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                <a href="/dashboard/product/detail?product_id=<?= $product['id'] ?>" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                <a href="/dashboard/product/edit?product_id=<?= $product['id'] ?>" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                <button class="btn action-icon" onclick="deleteProduct(<?= $product['id'] ?>)">
+                                    <i class="mdi mdi-delete"></i>
+                                </button>
+
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -60,3 +63,41 @@ $data = $products->all();
         </div>
     </div> <!-- end card-body-->
 </div> <!-- end card-->
+
+<script>
+    function deleteProduct(id) {
+        // Show a confirmation dialog
+        if (confirm("Are you sure you want to delete this product? ")) {
+            $.ajax({
+                type: "POST",
+                url: "/action/product/deleteProduct.php",
+                data: {
+                    id: id
+                },
+                dataType: "json",
+                success: function(res) {
+                    if (res.status == 'success') {
+                        toastr.success(res.message);
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        toastr.error(res.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Display a generic error message if available
+                    toastr.error(jqXHR.responseJSON ? jqXHR.responseJSON.message : 'An error occurred');
+
+                    // Log detailed error information to the console for debugging
+                    console.error('Error Status:', textStatus);
+                    console.error('Error Thrown:', errorThrown);
+                    console.error('Response Text:', jqXHR.responseText);
+                }
+            });
+
+        } else {
+            toastr.info('Deleting Cancel');
+        }
+    }
+</script>

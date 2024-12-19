@@ -20,8 +20,8 @@ if (!$product) {
                     <center>
 
                         <div class="image-box">
-                            <figure class="image"><img src="<?= default_img_product(4) ?>" alt=""></figure>
-                            <div class="preview-link"><a href="<?= default_img_product(4) ?>" class="lightbox-image" data-fancybox="gallery"><i class="far fa-search-plus"></i></a></div>
+                            <figure class="image"><img src="<?= $product->image ?? '' ?>" alt=""></figure>
+                            <div class="preview-link"><a href="<?= $product->image ?? '' ?>" class="lightbox-image" data-fancybox="gallery"><i class="far fa-search-plus"></i></a></div>
                         </div>
                     </center>
                 </div>
@@ -37,7 +37,7 @@ if (!$product) {
                                 <ul class="list">
                                     <b>
                                         <li>Size :</li>
-                                        <li>05</li>
+                                        <li><?= $product->size ?></li>
                                     </b>
                                 </ul>
                             </div>

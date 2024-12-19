@@ -23,7 +23,9 @@ $order_count = count($order_count);
                     <div class="col-lg-7">
                         <form class="ps-lg-4">
                             <!-- Product title -->
-                            <h3 class="mt-0"><?= ucwords($product->name) ?> <a href="javascript: void(0);" class="text-muted"><i class="mdi mdi-square-edit-outline ms-2"></i></a> </h3>
+                            <h3 class="mt-0"><?= ucwords($product->name) ?>
+                                <a href="/dashboard/product/edit?product_id=<?= $product->id ?>" class="text-muted"><i class="mdi mdi-square-edit-outline ms-2"></i></a>
+                            </h3>
                             <p class="mb-1">Added Date: <?= dateFormat($product->created_at)  ?></p>
 
                             <!-- Product description -->
