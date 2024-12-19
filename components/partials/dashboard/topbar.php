@@ -60,12 +60,6 @@
             </li>
 
 
-            <li class="d-none d-md-inline-block">
-                <a class="nav-link" href="#" data-toggle="fullscreen">
-                    <i class="ri-fullscreen-line font-22"></i>
-                </a>
-            </li>
-
             <li class="dropdown">
                 <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <span class="account-user-avatar">

@@ -52,9 +52,9 @@
 
         <li class="side-nav-title"> Pesanan </li>
         <li class="side-nav-item">
-            <a href="apps-calendar.html" class="side-nav-link">
+            <a href="/dashboard/order/list_order" class="side-nav-link">
                 <i class="  uil-streering"></i>
-                <span> Manage Order </span>
+                <span> List Order </span>
             </a>
         </li>
 

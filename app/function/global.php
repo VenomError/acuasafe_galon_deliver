@@ -52,3 +52,30 @@ function RPformat($number)
 
     return "Rp {$formated}";
 }
+
+function confirmColor(bool $isConfirm)
+{
+    if ($isConfirm == true) {
+        return "success";
+    } else {
+        return 'danger';
+    }
+}
+
+function orderStatusColor($status)
+{
+    switch ($status) {
+
+        case 'new':
+            return 'warning';
+        case 'otw':
+            return 'info';
+        case 'cancel':
+            return 'danger';
+        case 'completed':
+            return 'success';
+
+        default:
+            return 'primary';
+    }
+}

@@ -56,4 +56,18 @@ class Order extends DB
         $sql = "UPDATE {$this->table} SET resit='$uploadName' WHERE id='$order_id'";
         $result = $this->query($sql);
     }
+
+    public function joinCostumer()
+    {
+        return $this->query("
+            SELECT  
+            {$this->table}.*,
+             costumer.name  AS costumer_name,
+             costumer.id  AS costumer_id
+            FROM {$this->table}
+            JOIN costumer ON {$this->table}.costumer_id=costumer.id
+            ORDER BY distance
+         ")
+            ->fetch_all(MYSQLI_ASSOC);
+    }
 }
