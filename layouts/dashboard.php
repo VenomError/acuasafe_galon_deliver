@@ -1,3 +1,6 @@
+<?php
+admin_only();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,18 +13,24 @@
     <meta content="Coderthemes" name="author" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+    <!-- Datatable css -->
+    <link href="/assets/hyper/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/hyper/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+
 
     <!-- Theme Config Js -->
-    <script src="../assets/hyper/js/hyper-config.js"></script>
+    <script src="/assets/hyper/js/hyper-config.js"></script>
 
     <!-- App css -->
-    <link href="../assets/hyper/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="/assets/hyper/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- Icons css -->
-    <link href="../assets/hyper/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/hyper/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
 </head>
 
 <body>
@@ -64,26 +73,6 @@
 
             </div> <!-- content -->
 
-            <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> © Hyper - Coderthemes.com
-                        </div>
-                        <div class="col-md-6">
-                            <div class="text-md-end footer-links d-none d-md-block">
-                                <a href="javascript: void(0);">About</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
 
         </div>
 
@@ -96,17 +85,51 @@
 
 
     <!-- Vendor js -->
-    <script src="../assets/hyper/js/vendor.min.js"></script>
+    <script src="/assets/hyper/js/vendor.min.js"></script>
+
+    <!-- Datatable js -->
+    <script src="/assets/hyper/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/hyper/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/assets/hyper/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/hyper/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="/assets/hyper/vendor/jquery-datatables-checkboxes/js/dataTables.checkboxes.min.js"></script>
+
 
     <!-- App js -->
-    <script src="../assets/hyper/js/app.min.js"></script>
+    <script src="/assets/hyper/js/app.min.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css
-"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            "use strict";
+            $("#products-datatable").DataTable({
+                language: {
+                    paginate: {
+                        previous: "<i class='mdi mdi-chevron-left'>",
+                        next: "<i class='mdi mdi-chevron-right'>"
+                    },
+                    info: "Showing products _START_ to _END_ of _TOTAL_",
+                    lengthMenu: 'Display <select class=\'form-select form-select-sm ms-1 me-1\'><option value="5">5</option><option value="10">10</option><option value="20">20</option><option value="-1">All</option></select> products'
+                },
+                pageLength: 5,
+                select: {
+                    style: "multi"
+                },
+                order: [
+                    [1, "asc"]
+                ],
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#products-datatable_length label").addClass("form-label"), document.querySelector(".dataTables_wrapper .row").querySelectorAll(".col-md-6").forEach(function(e) {
+                        e.classList.add("col-sm-6"), e.classList.remove("col-sm-12"), e.classList.remove("col-md-6")
+                    })
+                }
+            })
+        });
+    </script>
 
     <?= component('partials/flash') ?>
-
 </body>
 
 

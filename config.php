@@ -9,4 +9,4 @@ define("DB_PORT", "3306");
 
 // APP CONFIG
 
-define("BASE_URL", "http://localhost:8080/");
+define("BASE_URL", "http://localhost:8000/");

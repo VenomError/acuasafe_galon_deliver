@@ -36,3 +36,19 @@ function default_img_product($num = 4)
 {
     return "assets/images/resource/shop/shop-$num.jpg";
 }
+
+function dateFormat($date, $format = 'd M, y h:ia')
+{
+    $date = date_create($date);
+
+    return date_format($date, $format);
+}
+
+
+function RPformat($number)
+{
+
+    $formated = number_format($number, 2, ',', '.');
+
+    return "Rp {$formated}";
+}

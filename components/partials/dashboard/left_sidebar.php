@@ -3,20 +3,20 @@
     <!-- Brand Logo Light -->
     <a href="index.html" class="logo logo-light">
         <span class="logo-lg">
-            <img src="../assets/images/logo-2.png" alt="logo">
+            <img src="/assets/images/logo-2.png" alt="logo">
         </span>
         <span class="logo-sm">
-            <img src="../assets/images/logo-2sm.png" alt="small logo">
+            <img src="/assets/images/logo-2sm.png" alt="small logo">
         </span>
     </a>
 
     <!-- Brand Logo Dark -->
     <a href="index.html" class="logo logo-dark">
         <span class="logo-lg">
-            <img src="../assets/images/logo-2.png" alt="dark logo">
+            <img src="/assets/images/logo-2.png" alt="dark logo">
         </span>
         <span class="logo-sm">
-            <img src="../assets/images/logo-2sm.png" alt="small logo">
+            <img src="/assets/images/logo-2sm.png" alt="small logo">
         </span>
     </a>
 
