@@ -17,6 +17,10 @@ try {
 
     if (!empty($_FILES['image']['name'])) {
         $product->image = uploadFile('image', 'product');
+        $productWantUpdate = $product->find($_POST['id']);
+        if (file_exists(__DIR__ . '/../..' . $productWantUpdate->image)) {
+            unlink(__DIR__ . '/../..' . $productWantUpdate->image);
+        }
     } else {
         $product->image = $_POST['oldImage'];
     }

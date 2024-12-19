@@ -10,6 +10,12 @@ try {
     }
     $product = new Produk();
 
+    $productWantDelete = $product->find($_POST['id']);
+    if (file_exists(__DIR__ . '/../..' . $productWantDelete->image)) {
+        unlink(__DIR__ . '/../..' . $productWantDelete->image);
+    }
+
+
     $product->delete($_POST['id']);
 
     echo json_encode([
