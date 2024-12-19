@@ -12,7 +12,7 @@ $data = $products->all();
             <div class="col-sm-5">
             </div>
             <div class="col-sm-7 text-end">
-                <a href="javascript:void(0);" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Products</a>
+                <a href="/dashboard/product/create_product" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Product</a>
             </div><!-- end col-->
         </div>
 
@@ -31,9 +31,9 @@ $data = $products->all();
                     <?php foreach ($data as $product) : ?>
                         <tr>
                             <td>
-                                <img src="<?= $product['image'] ?? '' ?>" alt="contact-img" title="product-img" class="rounded me-3" height="48" />
+                                <img src="<?= $product['image'] ?? '' ?>" alt="contact-img" title="product-img" class="rounded me-3" width="100" />
                                 <p class="m-0 d-inline-block align-middle font-16">
-                                    <a href="/dashboard/product/detail" class="text-primary"><?= ucwords($product['name']) ?></a>
+                                    <a href="/dashboard/product/detail?product_id=<?= $product['id'] ?>" class="text-primary"><?= ucwords($product['name']) ?></a>
                                 </p>
                             </td>
                             <td>

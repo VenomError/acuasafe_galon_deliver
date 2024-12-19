@@ -48,4 +48,26 @@ class OrderItem extends DB
             return [];
         }
     }
+
+    public function getByProduct($product_id)
+    {
+
+        $result = $this->query("SELECT * FROM {$this->table} WHERE product_id='$product_id'");
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    public function getTotalQuantityByProduct($product_id)
+    {
+
+        $query = "SELECT SUM(quantity) as total_quantity FROM {$this->table} 
+                  WHERE product_id = '{$product_id}'";
+
+        $result = $this->query($query);
+
+        if ($result) {
+            $row = $result->fetch_assoc();
+            return $row['total_quantity'] ?? 0; // Return the sum or 0 if no rows are returned
+        }
+
+        return 0;
+    }
 }
