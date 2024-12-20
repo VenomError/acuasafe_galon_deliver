@@ -118,4 +118,13 @@ class Order extends DB
     {
         return $this->query("UPDATE {$this->table} SET is_confirm=1 WHERE id='$id'");
     }
+
+    public function getCount($status = null)
+    {
+        if (is_null($status)) {
+            return $this->query("SELECT * FROM {$this->table}")->num_rows;
+        } else {
+            return $this->query("SELECT * FROM {$this->table} WHERE `status`='$status'")->num_rows;
+        }
+    }
 }
