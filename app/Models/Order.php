@@ -64,7 +64,7 @@ class Order extends DB
              costumer.name  AS costumer_name,
              costumer.id  AS costumer_id
             FROM {$this->table}
-            JOIN costumer ON {$this->table}.costumer_id=costumer.id
+            LEFT JOIN costumer ON {$this->table}.costumer_id=costumer.id
             ORDER BY distance
          ");
     }
@@ -76,7 +76,7 @@ class Order extends DB
              costumer.name  AS costumer_name,
              costumer.id  AS costumer_id
             FROM {$this->table}
-            JOIN costumer ON {$this->table}.costumer_id=costumer.id
+            LEFT JOIN costumer ON {$this->table}.costumer_id=costumer.id
             WHERE status='$status'
             ORDER BY distance
          ");
@@ -91,7 +91,7 @@ class Order extends DB
          costumer.email  AS costumer_email,
          costumer.phone  AS costumer_phone
         FROM {$this->table}
-        JOIN costumer ON {$this->table}.costumer_id=costumer.id
+       LEFT JOIN costumer ON {$this->table}.costumer_id=costumer.id
         WHERE {$this->table}.id='$id'
      ")->fetch_object();
     }

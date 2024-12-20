@@ -45,4 +45,9 @@ class Costumer extends DB
             throw new \Exception($th);
         }
     }
+
+    public function delete($id)
+    {
+        return $this->query("DELETE FROM costumer WHERE id='$id'");
+    }
 }
