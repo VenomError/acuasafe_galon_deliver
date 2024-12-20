@@ -33,17 +33,29 @@ $longitudeFrom = $metadata->get('office_longitude');
                         <tr>
 
                             <td>
-                                <span class="badge p-1 bg-<?= orderStatusColor($order['status']) ?>"><?= $order['status'] ?></span>
+                                <div style="width: 100px;">
+                                    <select name="" id="" class="form-control text-center border border-<?= orderStatusColor($order['status']) ?> text-<?= orderStatusColor($order['status']) ?>"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Order Status"
+                                        data-id="<?= $order['id'] ?>"
+                                        onchange="updateOrderStatus(this)">
+                                        <option value="new" <?= $order['status'] == 'new' ? 'selected' : '' ?> class="text-warning">new</option>
+                                        <option value="otw" <?= $order['status'] == 'otw' ? 'selected' : '' ?> class="text-info">otw</option>
+                                        <option value="completed" <?= $order['status'] == 'completed' ? 'selected' : '' ?> class="text-success">completed</option>
+                                        <option value="cancel" <?= $order['status'] == 'cancel' ? 'selected' : '' ?> class="text-danger">cancel</option>
+                                    </select>
+                                </div>
+
+                                <!-- <button class="btn  btn-sm btn-<?= orderStatusColor($order['status']) ?>"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Order Status">
+                                    <?= $order['status'] ?>
+                                </button> -->
                             </td>
                             <td><?= dateFormat($order['created_at']) ?></td>
                             <td>
                                 <span class="me-2">
                                     <?= $order['distance'] ?> KM
                                 </span>
-                                <?php
-                                $directionMap = "https://www.google.com/maps/dir/?api=1&origin={$latitudeFrom},{$longitudeFrom}&destination={$order['latitude']},{$order['longitude']}";
-                                ?>
-                                <a href="<?= $directionMap ?>" class=" rounded-circle action-icon bg-info text-white"
+                                <a href="<?= viewGoogleMap($order['latitude'], $order['longitude']) ?>" class=" rounded-circle action-icon bg-info text-white"
                                     data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Route Map" target="_blank"> <i class="mdi mdi-google-maps"></i></a>
 
                             </td>
@@ -56,14 +68,19 @@ $longitudeFrom = $metadata->get('office_longitude');
                                 if (is_null($order['driver_id'])) :
                                 ?>
                                     <button class="btn btn-danger btn-sm"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Assign Order to Driver">
+                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Assign Order to Driver"
+                                        onclick="assignToDriver(<?= $order['id'] ?> , <?= null ?>)">
                                         <i class="mdi mdi-truck-delivery me-2"></i> Not Assign
                                     </button>
                                 <?php
                                 else :
                                     $getDriver = $drivers->find($order['driver_id']);
                                 ?>
-                                    <span class="text-primary"><?= $getDriver->name ?></span>
+                                    <button class="btn btn-success btn-sm"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Assign Order to Driver"
+                                        onclick="assignToDriver(<?= $order['id'] ?> , <?= $getDriver->id ?> )">
+                                        <i class="mdi mdi-truck-delivery me-2"></i> <?= $getDriver->name ?>
+                                    </button>
                                 <?php
                                 endif;
                                 ?>
@@ -76,8 +93,6 @@ $longitudeFrom = $metadata->get('office_longitude');
                             <td class="table-action">
                                 <a href="/dashboard/order/detail?order_id=<?= $order['id'] ?>" class="action-icon"
                                     data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Detail"> <i class="mdi mdi-eye"></i></a>
-                                <a href="/dashboard/order/edit?order_id=<?= $order['id'] ?>" class="action-icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"> <i class="mdi mdi-square-edit-outline"></i></a>
                                 <button class="btn action-icon" onclick="deleteOrder(<?= $order['id'] ?>)"
                                     data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
                                     <i class="mdi mdi-delete"></i>
@@ -90,6 +105,38 @@ $longitudeFrom = $metadata->get('office_longitude');
         </div>
     </div> <!-- end card-body-->
 </div> <!-- end card-->
+
+<div class="modal fade" id="assignDriverModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="assignDriverModalLabel">Assign Order to Driver</h4>
+            </div>
+            <div class="modal-body">
+                <form id="assignDriverForm">
+                    <div class="mb-3">
+                        <label for="driver_id" class="form-label">Select Driver</label>
+                        <?php
+                        $optionDriver = $drivers->all();
+                        ?>
+                        <select name="driver_id" id="driver_id" class="form-control" required>
+                            <option value="">Select Driver</option>
+                            <?php foreach ($optionDriver as $driver) : ?>
+                                <option value="<?= $driver['id'] ?>"><?= ucwords($driver['name']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal" aria-hidden="true">Assign</button>
+                        <button type="reset" class="btn btn-sm btn-danger" data-bs-dismiss="modal" aria-hidden="true">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 
 <script>
     function deleteOrder(id) {
@@ -126,5 +173,86 @@ $longitudeFrom = $metadata->get('office_longitude');
         } else {
             toastr.info('Deleting Cancel');
         }
+    }
+
+    function assignToDriver(id, driver = null) {
+        $('#assignDriverModal').modal('show');
+        // Set the driver_id in the form if a driver is provided
+        if (driver !== null && !isNaN(driver)) {
+            $('#driver_id').val(driver);
+        }
+
+        $('#assignDriverForm').submit(function(e) {
+            e.preventDefault();
+
+            let driver_id = $('#driver_id').val();
+            if (driver_id == null) {
+                return toastr.error('please select driver');
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/action/order/assignDriver.php",
+                data: {
+                    id: id,
+                    driver_id: driver_id
+                },
+                dataType: "json",
+                success: function(res) {
+                    if (res.status == 'success') {
+                        toastr.success(res.message);
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        toastr.error(res.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Display a generic error message if available
+                    toastr.error(jqXHR.responseJSON ? jqXHR.responseJSON.message : 'An error occurred');
+
+                    // Log detailed error information to the console for debugging
+                    console.error('Error Status:', textStatus);
+                    console.error('Error Thrown:', errorThrown);
+                    console.error('Response Text:', jqXHR.responseText);
+                }
+            });
+
+        });
+    }
+
+    function updateOrderStatus(selectElement) {
+        const newStatus = selectElement.value;
+        const id = selectElement.getAttribute('data-id');
+
+        $.ajax({
+            type: "POST",
+            url: "/action/order/updateStatus.php",
+            data: {
+                id: id,
+                status: newStatus
+            },
+            dataType: "json",
+            success: function(res) {
+                if (res.status == 'success') {
+                    toastr.success(res.message);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    toastr.error(res.message);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Display a generic error message if available
+                toastr.error(jqXHR.responseJSON ? jqXHR.responseJSON.message : 'An error occurred');
+
+                // Log detailed error information to the console for debugging
+                console.error('Error Status:', textStatus);
+                console.error('Error Thrown:', errorThrown);
+                console.error('Response Text:', jqXHR.responseText);
+            }
+        });
     }
 </script>

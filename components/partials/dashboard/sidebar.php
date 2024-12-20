@@ -37,7 +37,7 @@
             <a href="/dashboard/order/new_order" class="side-nav-link">
                 <i class="  uil-streering"></i>
                 <span> New Order </span>
-                <span class="badge bg-info"><?= $orderCount ?></span>
+                <span class="badge bg-warning"><?= $orderCount ?></span>
             </a>
         </li>
         <li class="side-nav-item">

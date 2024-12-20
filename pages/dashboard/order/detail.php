@@ -73,11 +73,13 @@ $order_item = $order_item->getByOrder($id);
                         </tbody>
                     </table>
                 </div>
-                <!-- end table-responsive -->
-
+                <?php if (!$order->is_confirm) : ?>
+                    <div class="text-end mt-5">
+                        <button onclick="confirmOrder(<?= $order->id ?>)" type="button" class="btn btn-md btn-danger">Confirm This Order</button>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
-
     </div>
     <div class="col-lg-4">
         <div class="col-12">
@@ -230,4 +232,44 @@ $order_item = $order_item->getByOrder($id);
             </div>
         </div>
     </div>
+
 </div>
+
+<script>
+    function confirmOrder(id) {
+
+        if (!confirm('konfirmasi order ini ?')) {
+            toastr.info('canceled');
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/action/order/confirmOrder.php",
+            data: {
+                id: id,
+            },
+            dataType: "json",
+            success: function(res) {
+                if (res.status == 'success') {
+                    toastr.success(res.message);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    toastr.error(res.message);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Display a generic error message if available
+                toastr.error(jqXHR.responseJSON ? jqXHR.responseJSON.message : 'An error occurred');
+
+                // Log detailed error information to the console for debugging
+                console.error('Error Status:', textStatus);
+                console.error('Error Thrown:', errorThrown);
+                console.error('Response Text:', jqXHR.responseText);
+            }
+        });
+
+    }
+</script>

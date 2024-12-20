@@ -79,3 +79,14 @@ function orderStatusColor($status)
             return 'primary';
     }
 }
+
+function viewGoogleMap($latitude, $longitude)
+{
+    $metadata = new \App\Models\Metadata();
+
+    $latitudeFrom = $metadata->get('office_latitude');
+    $longitudeFrom = $metadata->get('office_longitude');
+
+    $directionMap = "https://www.google.com/maps/dir/?api=1&origin={$latitudeFrom},{$longitudeFrom}&destination={$latitude},{$longitude}";
+    return $directionMap;
+}

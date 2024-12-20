@@ -107,4 +107,15 @@ class Order extends DB
         $sql = "UPDATE {$this->table} SET driver_id='$driver_id' WHERE id='$order_id'";
         return   $this->query($sql);
     }
+
+    public function updateStatus($order_id, $status)
+    {
+        $sql = "UPDATE {$this->table} SET `status`='$status' WHERE id='$order_id'";
+        return   $this->query($sql);
+    }
+
+    public function confirmOrder($id)
+    {
+        return $this->query("UPDATE {$this->table} SET is_confirm=1 WHERE id='$id'");
+    }
 }
