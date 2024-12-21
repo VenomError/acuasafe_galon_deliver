@@ -61,6 +61,24 @@ class OrderItem extends DB
         $result = $this->query("SELECT * FROM {$this->table} WHERE product_id='$product_id'");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    public function getSumQuantityByProduct($product_id)
+    {
+        // Melakukan query menggunakan SQL dengan SUM untuk menjumlahkan quantity
+        $query = "SELECT SUM(quantity) as total_quantity FROM {$this->table} WHERE product_id='$product_id'";
+
+        // Menjalankan query
+        $result = $this->query($query);
+
+        // Memeriksa apakah query berhasil dan mengambil jumlah total
+        if ($result) {
+            $row = $result->fetch_assoc();
+            return $row['total_quantity'] ?? 0;  // Mengembalikan 0 jika tidak ada hasil
+        }
+
+        // Jika terjadi error pada query, kembalikan 0
+        return 0;
+    }
+
     public function getTotalQuantityByProduct($product_id)
     {
 
