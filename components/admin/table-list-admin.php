@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Driver;
+use App\Models\Admin;
 
-$drivers = new Driver();
-$data = $drivers->all();
+$admins = new Admin();
+$data = $admins->all();
 
 ?>
 <div class="card">
@@ -12,7 +12,7 @@ $data = $drivers->all();
             <div class="col-sm-5">
             </div>
             <div class="col-sm-7 text-end">
-                <a href="/dashboard/driver/create" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Driver</a>
+                <a href="/dashboard/admin/create" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Admin</a>
             </div><!-- end col-->
         </div>
 
@@ -20,36 +20,33 @@ $data = $drivers->all();
             <table class="table table-centered w-100 dt-responsive nowrap" id="drivers-datatable">
                 <thead class="table-light">
                     <tr>
-                        <th class="all">Driver Name</th>
+                        <th class="all">Admin Name</th>
                         <th>Email</th>
-                        <th>Phone</th>
                         <th>Created At</th>
                         <th style="width: 85px;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($data as $driver) : ?>
+                    <?php foreach ($data as $admin) : ?>
                         <tr>
                             <td>
-                                <?= $driver['name'] ?>
+                                <?= $admin['name'] ?>
                             </td>
 
                             <td>
-                                <?= $driver['email'] ?>
-                            </td>
-                            <td>
-                                <?= $driver['phone'] ?>
+                                <?= $admin['email'] ?>
                             </td>
 
                             <td>
-                                <?= dateFormat($driver['created_at']) ?>
+                                <?= dateFormat($admin['created_at']) ?>
                             </td>
 
                             <td class="table-action">
-                                <a href="/dashboard/product/detail?product_id=<?= $driver['id'] ?>" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                <button class="btn action-icon" onclick="deleteDriver(<?= $driver['id'] ?>)">
-                                    <i class="mdi mdi-delete"></i>
-                                </button>
+                                <?php if (admin()->id != $admin['id']) : ?>
+                                    <button class="btn action-icon" onclick="deleteAdmin(<?= $admin['id'] ?>)">
+                                        <i class="mdi mdi-delete"></i>
+                                    </button>
+                                <?php endif; ?>
 
                             </td>
                         </tr>
@@ -61,12 +58,12 @@ $data = $drivers->all();
 </div> <!-- end card-->
 
 <script>
-    function deleteDriver(id) {
+    function deleteAdmin(id) {
         // Show a confirmation dialog
-        if (confirm("Are you sure you want to delete this driver? ")) {
+        if (confirm("Are you sure you want to delete this admin? ")) {
             $.ajax({
                 type: "POST",
-                url: "/action/driver/deleteDriver.php",
+                url: "/action/admin/deleteAdmin.php",
                 data: {
                     id: id
                 },

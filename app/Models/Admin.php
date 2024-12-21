@@ -31,4 +31,9 @@ class Admin extends DB
             return null;
         }
     }
+
+    public function delete($id)
+    {
+        return $this->query("DELETE FROM admin WHERE id='$id'");
+    }
 }

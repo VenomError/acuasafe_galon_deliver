@@ -73,9 +73,9 @@
         <li class="side-nav-title">Pengguna</li>
 
         <li class="side-nav-item">
-            <a href="/dashboard/costumer/list_costumer" class="side-nav-link">
+            <a href="/dashboard/admin/list_admin" class="side-nav-link">
                 <i class=" uil-users-alt"></i>
-                <span> Costumer </span>
+                <span> Admin </span>
             </a>
         </li>
 
@@ -83,6 +83,13 @@
             <a href="/dashboard/driver/list_driver" class="side-nav-link">
                 <i class="  uil-streering"></i>
                 <span> Driver </span>
+            </a>
+        </li>
+
+        <li class="side-nav-item">
+            <a href="/dashboard/costumer/list_costumer" class="side-nav-link">
+                <i class=" uil-users-alt"></i>
+                <span> Costumer </span>
             </a>
         </li>
 
