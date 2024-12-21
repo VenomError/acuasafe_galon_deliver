@@ -150,4 +150,9 @@ class Order extends DB
             return $this->query("SELECT * FROM {$this->table} WHERE `status`='$status' AND driver_id='$driver_id'")->num_rows;
         }
     }
+
+    public function getByCostumer($costumer_id)
+    {
+        return $this->query("SELECT * FROM {$this->table} WHERE costumer_id='$costumer_id'");
+    }
 }

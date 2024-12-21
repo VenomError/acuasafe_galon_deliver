@@ -43,7 +43,8 @@ class OrderItem extends DB
         $sql = "SELECT 
         order_item.*, 
         product.name AS product_name ,
-        product.price AS product_price 
+        product.price AS product_price ,
+        product.image AS product_image 
         FROM {$this->table} 
         JOIN product ON order_item.product_id = product.id
         WHERE order_id = '$order_id'";

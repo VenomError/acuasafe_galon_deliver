@@ -86,7 +86,7 @@ $order_item = $order_item->getByOrder($id);
                     <div>
                         <span class="fw-bold ">Open Map Direction</span>
                         <a href="<?= viewGoogleMap($order->latitude, $order->longitude) ?>" class=" rounded-circle action-icon bg-info text-white p-1 me-2"
-                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Route Map" target="_blank"> <i class="mdi mdi-google-maps display-6"></i>
+                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Route Map" target="_blank"> <i class="mdi mdi-google-maps " style="font-size: 20px;"></i>
                         </a>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ try {
 
     echo json_encode([
         'status' => 'success',
-        'message' => 'assign  order driver success'
+        'message' => 'update status success'
     ]);
 } catch (\Throwable $th) {
     echo json_encode([
