@@ -45,10 +45,6 @@ $longitudeFrom = $metadata->get('office_longitude');
                                     </select>
                                 </div>
 
-                                <!-- <button class="btn  btn-sm btn-<?= orderStatusColor($order['status']) ?>"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Order Status">
-                                    <?= $order['status'] ?>
-                                </button> -->
                             </td>
                             <td><?= dateFormat($order['created_at']) ?></td>
                             <td>
@@ -61,7 +57,7 @@ $longitudeFrom = $metadata->get('office_longitude');
                             </td>
                             <td><?= RPformat($order['total_amount']) ?></td>
                             <td>
-                                <span class="text-primary"><?= $order['costumer_name'] ?></span>
+                                <span class="text-primary"><?= $order['costumer_name']  ?></span>
                             </td>
                             <td>
                                 <?php

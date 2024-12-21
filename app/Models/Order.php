@@ -127,4 +127,27 @@ class Order extends DB
             return $this->query("SELECT * FROM {$this->table} WHERE `status`='$status'")->num_rows;
         }
     }
+
+    public function getByDriver($driver_id)
+    {
+        return $this->query("SELECT  
+        {$this->table}.*,
+         costumer.id  AS costumer_id,
+         costumer.name  AS costumer_name,
+         costumer.email  AS costumer_email,
+         costumer.phone  AS costumer_phone
+        FROM {$this->table}
+       LEFT JOIN costumer ON {$this->table}.costumer_id=costumer.id
+        WHERE {$this->table}.driver_id='$driver_id'
+     ");
+    }
+
+    public function getCountByDriver($driver_id, $status = null)
+    {
+        if (is_null($status)) {
+            return $this->query("SELECT * FROM {$this->table} WHERE driver_id='$driver_id'")->num_rows;
+        } else {
+            return $this->query("SELECT * FROM {$this->table} WHERE `status`='$status' AND driver_id='$driver_id'")->num_rows;
+        }
+    }
 }

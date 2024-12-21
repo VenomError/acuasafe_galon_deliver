@@ -46,7 +46,7 @@ $data = $drivers->all();
                             </td>
 
                             <td class="table-action">
-                                <a href="/dashboard/product/detail?product_id=<?= $driver['id'] ?>" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                <a href="/dashboard/driver/detail?driver_id=<?= $driver['id'] ?>" class="action-icon"> <i class="mdi mdi-eye"></i></a>
                                 <button class="btn action-icon" onclick="deleteDriver(<?= $driver['id'] ?>)">
                                     <i class="mdi mdi-delete"></i>
                                 </button>
