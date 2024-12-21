@@ -5,7 +5,7 @@ $otw = $order->getCount('otw');
 $cancel = $order->getCount('cancel');
 $completed = $order->getCount('completed');
 ?>
-<canvas id="orderChart"></canvas>
+<canvas id="orderChart" style="max-height: 300px;"></canvas>
 
 <script>
     $(document).ready(function() {

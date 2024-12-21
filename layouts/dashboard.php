@@ -31,7 +31,7 @@ admin_only();
     <!-- Icons css -->
     <link href="/assets/hyper/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/assets/js/chartJs.js"></script>
 
 </head>
 
