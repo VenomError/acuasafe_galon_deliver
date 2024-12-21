@@ -80,6 +80,23 @@ $order_item = $order_item->getByOrder($id);
                 <?php endif; ?>
             </div>
         </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title text-end">
+                    <div>
+                        <span class="fw-bold ">Open Map Direction</span>
+                        <a href="<?= viewGoogleMap($order->latitude, $order->longitude) ?>" class=" rounded-circle action-icon bg-info text-white p-1 me-2"
+                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Route Map" target="_blank"> <i class="mdi mdi-google-maps display-6"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <?= component('map_direction', [
+                    'latitudeTo' => $order->latitude,
+                    'longitudeTo' => $order->longitude
+                ]) ?>
+            </div>
+        </div>
     </div>
     <div class="col-lg-4">
         <div class="col-12">
@@ -200,6 +217,10 @@ $order_item = $order_item->getByOrder($id);
                     <h4 class="header-title mb-3">Delivery Info</h4>
                     <div class="text-center">
                         <i class="mdi mdi-truck-fast h2 text-muted"></i>
+                        <h5><b>Distance</b></h5>
+                        <h5><b class="text-info"><?= $order->distance ?> KM</b>
+                        </h5>
+
                         <h5><b>Delivery Status</b></h5>
                         <button
                             class="btn btn-sm btn-<?= orderStatusColor($order->status) ?> mb-2"
