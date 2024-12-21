@@ -12,7 +12,7 @@ $data = $drivers->all();
             <div class="col-sm-5">
             </div>
             <div class="col-sm-7 text-end">
-                <a href="/dashboard/product/create_product" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Product</a>
+                <a href="/dashboard/driver/create" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Driver</a>
             </div><!-- end col-->
         </div>
 
