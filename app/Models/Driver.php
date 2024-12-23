@@ -34,4 +34,17 @@ class Driver extends DB
         )
         ");
     }
+
+
+    public function getByEmail(string $email)
+    {
+
+        $sql = "SELECT * FROM driver WHERE email='$email'";
+        $driver = $this->query($sql);
+        if ($driver->num_rows > 0) {
+            return $driver->fetch_object();
+        } else {
+            return null;
+        }
+    }
 }

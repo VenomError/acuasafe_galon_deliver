@@ -63,6 +63,15 @@ function guest_admin_only()
     }
 }
 
+function guest_driver_only()
+{
+    if (driver_check()) {
+        return redirect('/driver');
+    } else {
+        return true;
+    }
+}
+
 
 // admin auth
 function admin()
@@ -73,9 +82,25 @@ function admin()
         return null;
     }
 }
+function driver()
+{
+    if (!is_null(session('driver'))) {
+        return session('driver');
+    } else {
+        return null;
+    }
+}
 function admin_check(): mixed
 {
     if (!is_null(admin())) {
+        return true;
+    } else {
+        return false;
+    }
+}
+function driver_check(): mixed
+{
+    if (!is_null(driver())) {
         return true;
     } else {
         return false;
@@ -89,6 +114,15 @@ function admin_only()
         return true;
     } else {
         return redirect('/dashboard/login');
+    }
+}
+function driver_only()
+{
+
+    if (driver_check()) {
+        return true;
+    } else {
+        return redirect('/driver/login');
     }
 }
 

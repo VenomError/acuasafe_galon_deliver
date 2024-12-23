@@ -142,6 +142,65 @@ class Order extends DB
      ");
     }
 
+    public function getByDriverAndConfirm($driver_id, $status = null)
+    {
+        if (is_null($status)) {
+            return $this->query("SELECT  
+            {$this->table}.*,
+             costumer.id  AS costumer_id,
+             costumer.name  AS costumer_name,
+             costumer.email  AS costumer_email,
+             costumer.phone  AS costumer_phone
+            FROM {$this->table}
+           LEFT JOIN costumer ON {$this->table}.costumer_id=costumer.id
+            WHERE {$this->table}.driver_id='$driver_id'
+            AND {$this->table}.is_confirm='1'
+         ");
+        } else {
+            return $this->query("SELECT  
+            {$this->table}.*,
+             costumer.id  AS costumer_id,
+             costumer.name  AS costumer_name,
+             costumer.email  AS costumer_email,
+             costumer.phone  AS costumer_phone
+            FROM {$this->table}
+           LEFT JOIN costumer ON {$this->table}.costumer_id=costumer.id
+            WHERE {$this->table}.driver_id='$driver_id'
+            AND {$this->table}.is_confirm='1'
+            AND status='$status' 
+         ");
+        }
+    }
+    public function getByDriverAndConfirmWhereStatus($driver_id, $status = null)
+    {
+        if (is_null($status)) {
+            return $this->query("SELECT  
+        {$this->table}.*,
+         costumer.id  AS costumer_id,
+         costumer.name  AS costumer_name,
+         costumer.email  AS costumer_email,
+         costumer.phone  AS costumer_phone
+        FROM {$this->table}
+       LEFT JOIN costumer ON {$this->table}.costumer_id=costumer.id
+        WHERE {$this->table}.driver_id='$driver_id'
+        AND {$this->table}.is_confirm='1'
+     ");
+        } else {
+            return $this->query("SELECT  
+            {$this->table}.*,
+             costumer.id  AS costumer_id,
+             costumer.name  AS costumer_name,
+             costumer.email  AS costumer_email,
+             costumer.phone  AS costumer_phone
+            FROM {$this->table}
+           LEFT JOIN costumer ON {$this->table}.costumer_id=costumer.id
+            WHERE {$this->table}.driver_id='$driver_id'
+            AND {$this->table}.is_confirm='1'
+            AND status='$status'
+         ");
+        }
+    }
+
     public function getCountByDriver($driver_id, $status = null)
     {
         if (is_null($status)) {
