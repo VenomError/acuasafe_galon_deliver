@@ -142,7 +142,7 @@ admin_only();
                     style: "multi"
                 },
                 order: [
-                    [1, "desc"]
+                    [1, "asc"]
                 ],
                 drawCallback: function() {
                     $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#products-datatable_length label").addClass("form-label"), document.querySelector(".dataTables_wrapper .row").querySelectorAll(".col-md-6").forEach(function(e) {
@@ -150,7 +150,6 @@ admin_only();
                     })
                 }
             })
-
             $("#costumers-datatable").DataTable({
                 language: {
                     paginate: {
@@ -173,7 +172,6 @@ admin_only();
                     })
                 }
             })
-
             $("#drivers-datatable").DataTable({
                 language: {
                     paginate: {

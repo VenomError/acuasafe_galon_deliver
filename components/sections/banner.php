@@ -15,11 +15,10 @@
                         <figure class="image image-2"><img src="assets/images/banner/vector-2.png" alt=""></figure>
                     </div>
                     <div class="content-box">
-                        <h2>Always Want Safe and Good Water for Healthy Life</h2>
-                        <p>Excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit.</p>
+                        <h2>Air Bersih dan Sehat untuk Keluarga Anda</h2>
+                        <p>Kami menyediakan layanan pengiriman galon cepat dan terpercaya untuk kebutuhan harian Anda.</p>
                         <div class="btn-box clearfix">
-                            <a href="service.html" class="theme-btn btn-one">Our Services</a>
-                            <a href="service.html" class="theme-btn banner-btn">Discover</a>
+                            
                         </div>
                     </div>
                 </div>
@@ -38,11 +37,10 @@
                         <figure class="image image-2"><img src="assets/images/banner/vector-2.png" alt=""></figure>
                     </div>
                     <div class="content-box">
-                        <h2>Always Want Safe and Good Water for Healthy Life</h2>
-                        <p>Excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit.</p>
+                        <h2>Kualitas Terjamin, Harga Bersahabat</h2>
+                        <p>Kami memastikan setiap tetes air yang Anda dapatkan sesuai dengan standar kesehatan.</p>
                         <div class="btn-box clearfix">
-                            <a href="service.html" class="theme-btn btn-one">Our Services</a>
-                            <a href="service.html" class="theme-btn banner-btn">Discover</a>
+                            
                         </div>
                     </div>
                 </div>
@@ -61,11 +59,9 @@
                         <figure class="image image-2"><img src="assets/images/banner/vector-2.png" alt=""></figure>
                     </div>
                     <div class="content-box">
-                        <h2>Always Want Safe and Good Water for Healthy Life</h2>
-                        <p>Excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit.</p>
+                        <h2>Pengiriman Cepat dan Mudah</h2>
+                        <p>Cukup pesan melalui aplikasi kami, air galon Anda akan tiba tepat waktu!</p>
                         <div class="btn-box clearfix">
-                            <a href="service.html" class="theme-btn btn-one">Our Services</a>
-                            <a href="service.html" class="theme-btn banner-btn">Discover</a>
                         </div>
                     </div>
                 </div>

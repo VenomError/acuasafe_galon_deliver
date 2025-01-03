@@ -12,21 +12,21 @@
                 <div class="content_block_2">
                     <div class="content-box">
                         <div class="sec-title light">
-                            <h2>Protect Your Family with One of The Best Water Filtering System.</h2>
+                            <h2>Lindungi Keluarga Anda dengan Air Minum Berkualitas Tinggi</h2>
                         </div>
                         <div class="inner-box">
                             <div class="single-item">
                                 <div class="icon-box"><i class="flaticon-draw-check-mark"></i></div>
                                 <div class="text">
-                                    <h4>Content Marketing</h4>
-                                    <p>Lorem ipsum dolor amet consectetur adipisicing sed do eiusmod tempor incididunt labore.</p>
+                                    <h4>Kualitas Terjamin</h4>
+                                    <p>Kami hanya menyediakan air minum dengan standar terbaik untuk kesehatan keluarga Anda.</p>
                                 </div>
                             </div>
                             <div class="single-item">
                                 <div class="icon-box"><i class="flaticon-draw-check-mark"></i></div>
                                 <div class="text">
-                                    <h4>Marketing Strategy</h4>
-                                    <p>Lorem ipsum dolor amet consectetur adipisicing sed do eiusmod tempor incididunt labore.</p>
+                                    <h4>Pengiriman Cepat</h4>
+                                    <p>Pesanan Anda akan dikirim dengan cepat, langsung ke depan pintu rumah Anda.</p>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 image-column">
                 <div class="image-box wow fadeInRight animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                    <figure class="image"><img src="assets/images/resource/chooseus-1.jpg" alt=""></figure>
+                    <figure class="image"><img src="assets/images/resource/chooseus-1.jpg" alt="Galon Delivery"></figure>
                 </div>
             </div>
         </div>

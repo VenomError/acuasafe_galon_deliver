@@ -16,8 +16,8 @@ $longitudeFrom = $metadata->get('office_longitude');
         <thead class="table-light">
             <tr>
                 <th></th>
-                <th>Created At</th>
                 <th>Distance</th>
+                <th>Created At</th>
                 <th class="all">Total Amount</th>
                 <th>Costumer</th>
                 <th>Payment Method</th>
@@ -45,13 +45,14 @@ $longitudeFrom = $metadata->get('office_longitude');
                         </div>
 
                     </td>
-                    <td><?= dateFormat($order['created_at']) ?></td>
                     <td>
                         <span class="me-2">
                             <?= $order['distance'] ?> KM
                         </span>
 
                     </td>
+                    <td><?= dateFormat($order['created_at']) ?></td>
+
                     <td><?= RPformat($order['total_amount']) ?></td>
                     <td>
                         <span class="text-primary"><?= $order['costumer_name']  ?></span>

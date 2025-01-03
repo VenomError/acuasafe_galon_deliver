@@ -40,13 +40,6 @@ $id = driver()->id;
                 <span> Completed Order </span>
             </a>
         </li>
-        <li class="side-nav-title">Setting</li>
-        <li class="side-nav-item">
-            <a href="/dashboard/setting/metadata" class="side-nav-link">
-                <i class=" ri-file-settings-line"></i> <!-- Ikon Pengaturan -->
-                <span> Metadata </span>
-            </a>
-        </li>
     </ul>
     <!--- End Sidemenu -->
 
