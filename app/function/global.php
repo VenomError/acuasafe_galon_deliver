@@ -31,7 +31,7 @@ if (!function_exists("get_url")) {
         $url = trim($url, "/");
         $url = preg_replace('/[^a-zA-Z0-9\/_-]/', '', $url); // Sanitasi URL
 
-        return $url;
+        return $url ?? 'index';
     }
 }
 
