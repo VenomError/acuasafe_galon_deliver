@@ -3,8 +3,7 @@
 if (!function_exists('page')) {
     function page($path)
     {
-        if(empty($path))
-        {
+        if (empty($path)) {
             $path = 'index';
         }
         $dir = __DIR__ . "/../../pages";
@@ -24,18 +23,21 @@ if (!function_exists("get_url")) {
 
     function get_url()
     {
-        $url = 'index'; // Default route
+        function get_url()
+        {
+            $url = 'index'; // Default route
 
-        // Gunakan REQUEST_URI jika PATH_INFO tidak tersedia
-        if (isset($_SERVER['REQUEST_URI'])) {
-            $parsed_url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Hanya ambil path
-            $url = $parsed_url ?: 'index';
+            // Cek apakah PATH_INFO tersedia
+            if (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] !== '') {
+                $url = $_SERVER['PATH_INFO'];
+            }
+
+            // Bersihkan URL
+            $url = trim($url, "/");
+            $url = preg_replace('/[^a-zA-Z0-9\/_-]/', '', $url);
+
+            return $url;
         }
-
-        $url = trim($url, "/");
-        $url = preg_replace('/[^a-zA-Z0-9\/_-]/', '', $url); // Sanitasi URL
-
-        return $url ?? 'index';
     }
 }
 
