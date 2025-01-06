@@ -26,8 +26,8 @@ if (!function_exists("get_url")) {
         $url = 'index'; // Default route
 
         // Cek apakah PATH_INFO tersedia
-        if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] !== '') {
-            $url = $_SERVER['REQUEST_URI'];
+        if (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] !== '') {
+            $url = $_SERVER['PATH_INFO'];
         }
 
         // Bersihkan URL
