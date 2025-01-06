@@ -25,9 +25,10 @@ if (!function_exists("get_url")) {
     {
         $url = 'index'; // Default route
 
-        // Cek apakah PATH_INFO tersedia
+        // Cek apakah REQUEST_URI tersedia
         if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] !== '') {
-            $url = $_SERVER['REQUEST_URI'];
+            // Pisahkan path dari query string
+            $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         }
 
         // Bersihkan URL
