@@ -29,7 +29,7 @@ if (request()->checkout) {
 }
 
 ?>
-<form  method="get">
+<form method="get">
     <section class="cart-section">
         <div class="auto-container">
             <div class="row clearfix">
@@ -100,7 +100,7 @@ if (request()->checkout) {
                                 ?>
                                 <li>Order Total:<span>Rp <?= number_format($total, 2) ?></span></li>
                             </ul>
-                            <button type="submit" name="checkout" value="<?= $true ?>" class="theme-btn btn-one">Proceed to Checkout</button>
+                            <button type="submit" name="checkout" value="<?= true ?>" class="theme-btn btn-one">Proceed to Checkout</button>
                         </div>
                     </div>
                 </div>
