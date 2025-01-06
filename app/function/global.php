@@ -20,13 +20,16 @@ if (!function_exists("get_url")) {
 
     function get_url()
     {
-        $url = 'index';
+        $url = 'index'; // Default route
 
-        if (isset($_SERVER['PATH_INFO'])) {
-            $url = $_SERVER["PATH_INFO"];
+        // Gunakan REQUEST_URI jika PATH_INFO tidak tersedia
+        if (isset($_SERVER['REQUEST_URI'])) {
+            $parsed_url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Hanya ambil path
+            $url = $parsed_url ?: 'index';
         }
 
         $url = trim($url, "/");
+        $url = preg_replace('/[^a-zA-Z0-9\/_-]/', '', $url); // Sanitasi URL
 
         return $url;
     }
