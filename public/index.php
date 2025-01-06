@@ -14,8 +14,15 @@ function set_title($page_title = 'home page')
     global $title;
     $title = $page_title;
 }
+$url = 'index';
 
-$content = page(get_url());
+if (isset($_SERVER['PATH_INFO'])) {
+    $url = $_SERVER["PATH_INFO"];
+}
+
+$url = trim($url, "/");
+
+$content = page($url);
 
 $layoutFile = __DIR__ . "/../layouts/{$layout}.php";
 
