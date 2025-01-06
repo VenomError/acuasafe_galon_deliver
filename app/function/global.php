@@ -3,6 +3,10 @@
 if (!function_exists('page')) {
     function page($path)
     {
+        if(empty($path))
+        {
+            $path = 'index';
+        }
         $dir = __DIR__ . "/../../pages";
         $file = "{$dir}/{$path}.php";
 
