@@ -9,7 +9,7 @@
     <title><?= ucwords($title) ?></title>
 
     <!-- Fav Icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
@@ -23,16 +23,16 @@
 
 
     <!-- Stylesheets -->
-    <link href="assets/css/font-awesome-all.css" rel="stylesheet">
-    <link href="assets/css/flaticon.css" rel="stylesheet">
-    <link href="assets/css/owl.css" rel="stylesheet">
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
-    <link href="assets/css/animate.css" rel="stylesheet">
-    <link href="assets/css/jquery-ui.css" rel="stylesheet">
-    <link href="assets/css/color.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome-all.css" rel="stylesheet">
+    <link href="/assets/css/flaticon.css" rel="stylesheet">
+    <link href="/assets/css/owl.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/css/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/jquery-ui.css" rel="stylesheet">
+    <link href="/assets/css/color.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
@@ -78,22 +78,22 @@
 
 
     <!-- jequery plugins -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/owl.js"></script>
-    <script src="assets/js/wow.js"></script>
-    <script src="assets/js/validation.js"></script>
-    <script src="assets/js/jquery.fancybox.js"></script>
-    <script src="assets/js/appear.js"></script>
-    <script src="assets/js/scrollbar.js"></script>
-    <script src="assets/js/jquery-ui.js"></script>
-    <script src="assets/js/jquery.nice-select.min.js"></script>
-    <script src="assets/js/jquery.bootstrap-touchspin.js"></script>
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/owl.js"></script>
+    <script src="/assets/js/wow.js"></script>
+    <script src="/assets/js/validation.js"></script>
+    <script src="/assets/js/jquery.fancybox.js"></script>
+    <script src="/assets/js/appear.js"></script>
+    <script src="/assets/js/scrollbar.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+    <script src="/assets/js/jquery.nice-select.min.js"></script>
+    <script src="/assets/js/jquery.bootstrap-touchspin.js"></script>
 
 
     <!-- main-js -->
-    <script src="assets/js/script.js"></script>
+    <script src="/assets/js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css
 "></script>
