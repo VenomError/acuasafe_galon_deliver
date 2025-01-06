@@ -29,7 +29,7 @@ if (request()->checkout) {
 }
 
 ?>
-<form action="" method="get">
+<form  method="get">
     <section class="cart-section">
         <div class="auto-container">
             <div class="row clearfix">
