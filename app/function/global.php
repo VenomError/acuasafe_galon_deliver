@@ -21,8 +21,6 @@ if (!function_exists('page')) {
 }
 if (!function_exists("get_url")) {
 
-    function get_url()
-    {
         function get_url()
         {
             $url = 'index'; // Default route
@@ -38,7 +36,6 @@ if (!function_exists("get_url")) {
 
             return $url;
         }
-    }
 }
 
 function default_img_product($num = 4)
