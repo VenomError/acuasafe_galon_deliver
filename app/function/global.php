@@ -21,21 +21,21 @@ if (!function_exists('page')) {
 }
 if (!function_exists("get_url")) {
 
-        function get_url()
-        {
-            $url = 'index'; // Default route
+    function get_url()
+    {
+        $url = 'index'; // Default route
 
-            // Cek apakah PATH_INFO tersedia
-            if (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] !== '') {
-                $url = $_SERVER['PATH_INFO'];
-            }
-
-            // Bersihkan URL
-            $url = trim($url, "/");
-            $url = preg_replace('/[^a-zA-Z0-9\/_-]/', '', $url);
-
-            return $url;
+        // Cek apakah PATH_INFO tersedia
+        if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] !== '') {
+            $url = $_SERVER['REQUEST_URI'];
         }
+
+        // Bersihkan URL
+        $url = trim($url, "/");
+        $url = preg_replace('/[^a-zA-Z0-9\/_-]/', '', $url);
+
+        return $url;
+    }
 }
 
 function default_img_product($num = 4)
