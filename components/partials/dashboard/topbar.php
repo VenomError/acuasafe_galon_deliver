@@ -5,7 +5,7 @@
             <!-- Topbar Brand Logo -->
             <div class="logo-topbar">
                 <!-- Logo light -->
-                <a href="index.html" class="logo-light">
+                <a href="" class="logo-light">
                     <span class="logo-lg">
                         <img src="/assets/hyper/images/logo.png" alt="logo">
                     </span>
@@ -15,7 +15,7 @@
                 </a>
 
                 <!-- Logo Dark -->
-                <a href="index.html" class="logo-dark">
+                <a href="" class="logo-dark">
                     <span class="logo-lg">
                         <img src="/assets/hyper/images/logo-dark.png" alt="dark logo">
                     </span>
@@ -76,32 +76,9 @@
                         <h6 class="text-overflow m-0">Welcome !</h6>
                     </div>
 
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <i class="mdi mdi-account-circle me-1"></i>
-                        <span>My Account</span>
-                    </a>
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <i class="mdi mdi-account-edit me-1"></i>
-                        <span>Settings</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <i class="mdi mdi-lifebuoy me-1"></i>
-                        <span>Support</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <i class="mdi mdi-lock-outline me-1"></i>
-                        <span>Lock Screen</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
+                    <a href="/logout" class="dropdown-item">
                         <i class="mdi mdi-logout me-1"></i>
                         <span>Logout</span>
                     </a>
