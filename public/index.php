@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . "/vendor/autoload.php";
+require_once __DIR__ . "/../vendor/autoload.php";
 date_default_timezone_set('Asia/Makassar');
 $layout = 'home';
 $title = 'home page';
@@ -17,7 +17,7 @@ function set_title($page_title = 'home page')
 
 $content = page(get_url());
 
-$layoutFile = __DIR__ . "/layouts/{$layout}.php";
+$layoutFile = __DIR__ . "/../layouts/{$layout}.php";
 
 if (file_exists($layoutFile)) {
     include $layoutFile;
