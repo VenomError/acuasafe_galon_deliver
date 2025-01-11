@@ -43,13 +43,13 @@
 
         <ul class="topbar-menu d-flex align-items-center gap-3">
 
-            <li class="dropdown notification-list">
+            <!-- <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="ri-notification-3-line font-22"></i>
                     <span class="noti-icon-badge"></span>
                 </a>
                 <?= component('partials/dashboard/notification') ?>
-            </li>
+            </li> -->
 
 
 
