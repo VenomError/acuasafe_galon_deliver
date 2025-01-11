@@ -42,7 +42,8 @@
                                     <div class="field-input">
                                         <input type="text" name="address_detail" required>
                                     </div>
-                                    <small>berikan informasi detail alamat , seperti warna rumah , nomor rumah , dsb.</small>
+                                    <small>berikan informasi detail alamat , seperti warna rumah , nomor rumah ,
+                                        dsb.</small>
                                 </div>
 
                                 <!-- geolocation -->
@@ -66,9 +67,11 @@
                                         <input type="text" readonly id="longitude" name="longitude">
                                     </div>
                                 </div>
-                                <small>jarak rumah anda dengan depot galon , klik tombol di bawah untuk mendapatkan informasi jarak dan lokasi</small>
+                                <small>jarak rumah anda dengan depot galon , klik tombol di bawah untuk mendapatkan
+                                    informasi jarak dan lokasi</small>
                                 <div>
-                                    <button class="btn btn-info" type="button" onclick="getLocation()">Dapatkan Informasi Jarak</button>
+                                    <button class="btn btn-info" type="button" onclick="getLocation()">Dapatkan
+                                        Informasi Jarak</button>
                                 </div>
                             </div>
                         </div>
@@ -86,13 +89,13 @@
                                         <p>Product</p>
                                         <span>Total</span>
                                     </li>
-                                    <?php foreach (session('cart') ?? [] as $cart) : ?>
+                                    <?php foreach (session('cart') ?? [] as $cart): ?>
                                         <li>
                                             <div class="single-box clearfix">
                                                 <input type="hidden">
                                                 <img src="assets/images/resource/shop/order-1.jpg" alt="">
-                                                <h6><?= ucwords($cart['name']) ?> x <?= $cart['quantity'] ?></h6>
-                                                <span>Rp <?= number_format(toFloat($cart['price']), 2) ?></span>
+                                                <h6><?= ucwords($cart[ 'name' ]) ?> x <?= $cart[ 'quantity' ] ?></h6>
+                                                <span>Rp <?= number_format(toFloat($cart[ 'price' ]), 2) ?></span>
                                             </div>
                                         </li>
                                     <?php endforeach; ?>
@@ -100,7 +103,7 @@
                                         <?php
                                         $total = 0;
                                         foreach (session('cart') ?? [] as $cart) {
-                                            $total += $cart['quantity'] * toFloat($cart['price']);
+                                            $total += $cart[ 'quantity' ] * toFloat($cart[ 'price' ]);
                                         }
                                         ?>
                                         <h6>Order Total</h6>
@@ -115,7 +118,8 @@
                                 <div class="option-block">
                                     <div class="custom-controls-stacked">
                                         <label class="custom-control material-checkbox">
-                                            <input type="radio" class="material-control-input" value="transfer" name="payment_method" checked>
+                                            <input type="radio" class="material-control-input" value="transfer"
+                                                name="payment_method" checked>
 
                                             <span class="material-control-indicator"></span>
                                             <span class="description">Bank Transfer</span>
@@ -128,7 +132,8 @@
                                 <div class="option-block">
                                     <div class="custom-controls-stacked">
                                         <label class="custom-control material-checkbox">
-                                            <input type="radio" class="material-control-input" name="payment_method" value="cod">
+                                            <input type="radio" class="material-control-input" name="payment_method"
+                                                value="cod">
                                             <span class="material-control-indicator"></span>
                                             <span class="description">COD</span>
                                         </label>
@@ -138,7 +143,8 @@
                                     </p>
                                 </div>
                                 <div class="btn-box">
-                                    <button type="button" onclick="getLocation()" id="submitButton" class="theme-btn btn-one">Pesan Sekarang</button>
+                                    <button type="button" onclick="getLocation()" id="submitButton"
+                                        class="theme-btn btn-one">Pesan Sekarang</button>
                                 </div>
                             </div>
                         </div>
@@ -198,37 +204,39 @@ $longitudeFrom = (float) $metadata->get('office_longitude');
     const map = L.map('mapDirection').setView([<?= $latitudeFrom ?>, <?= $longitudeFrom ?>], 13);
     const acuasfeMarker = L.marker([<?= $latitudeFrom ?>, <?= $longitudeFrom ?>]).addTo(map)
         .bindPopup('<center><b>ACUASFE</b></center><span><br>Lokasi office acusafe</span>').openPopup();
+
     // Menambahkan Tile Layer dari OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // Elemen untuk input dan tombol
     const latitude = document.getElementById('latitude');
     const longitude = document.getElementById('longitude');
     const distance = document.getElementById('distance');
-    const submitBtn = document.getElementById('submitButton');
     const failedGetLocation = document.getElementById("failedGetLocation");
+    const submitBtn = document.getElementById("submitButton");
 
-    let marker; // Menyimpan marker global
-    let routingControl; // Menyimpan kontrol routing global
+    let marker;
+    let routingControl;
 
-    // Fungsi untuk memeriksa apakah field latitude dan longitude terisi
+    // Fungsi untuk memeriksa apakah input latitude dan longitude terisi
     function checkFields() {
         if (latitude.value !== "" && longitude.value !== "") {
-            submitBtn.setAttribute('type', 'submit');
             submitBtn.disabled = false;
         } else {
             toastr.warning('Dapatkan lokasi Anda terlebih dahulu');
-            submitBtn.setAttribute('type', 'button');
             submitBtn.disabled = true;
         }
     }
 
-    // Fungsi untuk mendapatkan lokasi pengguna
+    // Fungsi untuk mendapatkan lokasi menggunakan Geolocation API
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
+            navigator.geolocation.getCurrentPosition(showPosition, showError, {
+                enableHighAccuracy: true, // Mengaktifkan akurasi tinggi
+                timeout: 20000, // Maksimum waktu (ms) untuk mendapatkan lokasi
+                maximumAge: 0 // Tidak menggunakan cache, selalu ambil lokasi baru
+            });
         } else {
             failedGetLocation.innerHTML = "Geolocation tidak didukung oleh browser ini.";
         }
@@ -243,17 +251,15 @@ $longitudeFrom = (float) $metadata->get('office_longitude');
         longitude.value = userLng;
         checkFields();
 
-        // Jika marker belum ada, buat marker baru, jika sudah ada, perbarui posisinya
+        // Jika marker belum ada, tambahkan marker
         if (!marker) {
-            const marker = L.marker([userLat, userLng], {
-                    draggable: true
-                }).addTo(map)
-                .bindPopup('Lokasi Anda', {
-                    autoPan: false
-                })
-                .openPopup();
-            // Update latitude dan longitude saat marker dipindah
-            marker.on('dragend', function(e) {
+            marker = L.marker([userLat, userLng], {
+                draggable: true
+            }).addTo(map)
+                .bindPopup('Lokasi Anda').openPopup();
+
+            // Event ketika marker dipindah
+            marker.on('dragend', function (e) {
                 const latLng = e.target.getLatLng();
                 latitude.value = latLng.lat;
                 longitude.value = latLng.lng;
@@ -261,29 +267,26 @@ $longitudeFrom = (float) $metadata->get('office_longitude');
                 updateRoute(latLng.lat, latLng.lng);
             });
         } else {
-            marker.setLatLng([userLat, userLng]); // Perbarui posisi marker
+            marker.setLatLng([userLat, userLng]);
         }
 
-        // Update rute setiap kali posisi marker berubah
+        // Update rute
         updateRoute(userLat, userLng);
 
-        // Hitung jarak dengan fetch API
+        // Hitung jarak menggunakan API backend
         fetch('/action/getDistance.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    latitude: userLat,
-                    longitude: userLng
-                })
-            })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ latitude: userLat, longitude: userLng })
+        })
             .then(response => response.json())
             .then(data => {
                 distance.value = data.distance;
             })
             .catch(error => {
-                toastr.error(error, 'Error');
+                toastr.error('Gagal menghitung jarak.', 'Error');
             });
     }
 
@@ -292,31 +295,32 @@ $longitudeFrom = (float) $metadata->get('office_longitude');
         switch (error.code) {
             case error.PERMISSION_DENIED:
                 failedGetLocation.innerHTML = "Pengguna menolak permintaan geolokasi.";
+                toastr.error("Akses geolokasi ditolak.");
                 break;
             case error.POSITION_UNAVAILABLE:
                 failedGetLocation.innerHTML = "Informasi lokasi tidak tersedia.";
+                toastr.error("Informasi lokasi tidak tersedia.");
                 break;
             case error.TIMEOUT:
                 failedGetLocation.innerHTML = "Permintaan lokasi timeout.";
+                toastr.error("Permintaan lokasi timeout.");
                 break;
-            case error.UNKNOWN_ERROR:
+            default:
                 failedGetLocation.innerHTML = "Terjadi kesalahan yang tidak diketahui.";
+                toastr.error("Kesalahan yang tidak diketahui.");
                 break;
         }
     }
 
-    // Fungsi untuk memperbarui rute ketika marker dipindahkan
+    // Fungsi untuk memperbarui rute
     function updateRoute(lat, lng) {
-        // Hapus rute lama
         if (routingControl) {
             map.removeControl(routingControl);
         }
-
-        // Tambahkan rute baru
         routingControl = L.Routing.control({
             waypoints: [
-                L.latLng(<?= $latitudeFrom ?>, <?= $longitudeFrom ?>), // Titik awal
-                L.latLng(lat, lng) // Lokasi baru dari marker yang dipindah
+                L.latLng(<?= $latitudeFrom ?>, <?= $longitudeFrom ?>),
+                L.latLng(lat, lng)
             ],
             routeWhileDragging: true
         }).addTo(map);
