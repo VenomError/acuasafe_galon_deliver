@@ -141,7 +141,7 @@ $longitudeFrom = $metadata->get('office_longitude');
         if (confirm("Are you sure you want to delete this product? ")) {
             $.ajax({
                 type: "POST",
-                url: "/action/Order/deleteOrder.php",
+                url: "/action/order/deleteOrder.php",
                 data: {
                     id: id
                 },
