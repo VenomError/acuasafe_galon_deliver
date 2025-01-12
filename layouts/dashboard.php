@@ -142,7 +142,7 @@ admin_only();
                     style: "multi"
                 },
                 order: [
-                    [1, "asc"]
+                    [1, "desc"]
                 ],
                 
                 drawCallback: function() {
