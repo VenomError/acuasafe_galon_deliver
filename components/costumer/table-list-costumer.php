@@ -46,7 +46,7 @@ $data = $costumer->all();
                             </td>
 
                             <td class="table-action">
-                                <a href="/dashboard/product/detail?product_id=<?= $costumer['id'] ?>" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                <!-- <a href="/dashboard/product/detail?product_id=" class="action-icon"> <i class="mdi mdi-eye"></i></a> -->
                                 <button class="btn action-icon" onclick="deleteCostumer(<?= $costumer['id'] ?>)">
                                     <i class="mdi mdi-delete"></i>
                                 </button>
