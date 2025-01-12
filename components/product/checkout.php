@@ -2,7 +2,7 @@
     <form action="/action/checkout.php" method="post" class="billing-form">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12 left-column">
+                <div class="col-12">
                     <div class="inner-box">
                         <div class="billing-info">
                             <h4 class="sub-title">Billing Details</h4>
@@ -77,9 +77,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12 mt-5">
+                    <div id="mapDirection" style="height: 500px;"></div>
+                </div>
 
-
-                <div class="col-lg-6 col-md-12 col-sm-12 right-column">
+                <div class="col-12 ">
                     <div class="inner-box">
                         <div class="order-info">
                             <h4 class="sub-title">Your Order</h4>
@@ -143,7 +145,7 @@
                                     </p>
                                 </div>
                                 <div class="btn-box">
-                                    <button type="button" onclick="getLocation()" id="submitButton"
+                                    <button type="button" id="submitButton" onclick="checkFields()"
                                         class="theme-btn btn-one">Pesan Sekarang</button>
                                 </div>
                             </div>
@@ -151,9 +153,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 mt-5">
-                    <div id="mapDirection" style="height: 500px;"></div>
-                </div>
+
 
             </div>
         </div>
@@ -164,7 +164,6 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 <?php
 
@@ -219,19 +218,32 @@ $longitudeFrom = (float) $metadata->get('office_longitude');
     let marker;
     let routingControl;
 
+
+    if (latitude.value !== "" && longitude.value !== "") {
+        submitBtn.innerHTML = 'Pesan Sekarang';
+    } else {
+        submitBtn.innerHTML = 'Dapatkan Informasi Lokasi';
+    }
+
     // Fungsi untuk memeriksa apakah input latitude dan longitude terisi
     function checkFields() {
+
+
         if (latitude.value !== "" && longitude.value !== "") {
-            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Pesan Sekarang';
+            submitBtn.setAttribute('type', 'submit');
         } else {
-            toastr.warning('Dapatkan lokasi Anda terlebih dahulu');
-            submitBtn.disabled = true;
+            getLocation();
         }
     }
 
     // Fungsi untuk mendapatkan lokasi menggunakan Geolocation API
     function getLocation() {
         if (navigator.geolocation) {
+
+            submitBtn.innerHTML = 'Loading...';
+
+
             navigator.geolocation.getCurrentPosition(showPosition, showError, {
                 enableHighAccuracy: true, // Mengaktifkan akurasi tinggi
                 timeout: 20000, // Maksimum waktu (ms) untuk mendapatkan lokasi
@@ -240,6 +252,8 @@ $longitudeFrom = (float) $metadata->get('office_longitude');
         } else {
             failedGetLocation.innerHTML = "Geolocation tidak didukung oleh browser ini.";
         }
+
+
     }
 
     // Fungsi untuk menangani posisi pengguna
