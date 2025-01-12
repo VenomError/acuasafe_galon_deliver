@@ -18,7 +18,7 @@ $longitudeFrom = $metadata->get('office_longitude');
                 <thead class="table-light">
                     <tr>
                         <th></th>
-                        <th>Distance</th>
+                        <th>Distance (KM)</th>
                         <th>Created At</th>
                         <th class="all">Total Amount</th>
                         <th>Costumer</th>
@@ -32,77 +32,88 @@ $longitudeFrom = $metadata->get('office_longitude');
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($data as $order) : ?>
+                    <?php foreach ($data as $order): ?>
                         <tr>
 
                             <td>
                                 <div style="width: 100px;">
-                                    <select name="" id="" class="form-control text-center border border-<?= orderStatusColor($order['status']) ?> text-<?= orderStatusColor($order['status']) ?>"
+                                    <select name="" id=""
+                                        class="form-control text-center border border-<?= orderStatusColor($order[ 'status' ]) ?> text-<?= orderStatusColor($order[ 'status' ]) ?>"
                                         data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Order Status"
-                                        data-id="<?= $order['id'] ?>"
-                                        onchange="updateOrderStatus(this)">
-                                        <option value="new" <?= $order['status'] == 'new' ? 'selected' : '' ?> class="text-warning">new</option>
-                                        <option value="otw" <?= $order['status'] == 'otw' ? 'selected' : '' ?> class="text-info">otw</option>
-                                        <option value="completed" <?= $order['status'] == 'completed' ? 'selected' : '' ?> class="text-success">completed</option>
-                                        <option value="cancel" <?= $order['status'] == 'cancel' ? 'selected' : '' ?> class="text-danger">cancel</option>
+                                        data-id="<?= $order[ 'id' ] ?>" onchange="updateOrderStatus(this)">
+                                        <option value="new" <?= $order[ 'status' ] == 'new' ? 'selected' : '' ?>
+                                            class="text-warning">new</option>
+                                        <option value="otw" <?= $order[ 'status' ] == 'otw' ? 'selected' : '' ?>
+                                            class="text-info">otw</option>
+                                        <option value="completed" <?= $order[ 'status' ] == 'completed' ? 'selected' : '' ?>
+                                            class="text-success">completed</option>
+                                        <option value="cancel" <?= $order[ 'status' ] == 'cancel' ? 'selected' : '' ?>
+                                            class="text-danger">cancel</option>
                                     </select>
                                 </div>
 
                             </td>
                             <td>
-                                <span class="me-2">
-                                    <?= $order['distance'] ?> KM
-                                </span>
-                                <a href="<?= viewGoogleMap($order['latitude'], $order['longitude']) ?>" class=" rounded-circle action-icon bg-info text-white"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Route Map" target="_blank"> <i class="mdi mdi-google-maps"></i></a>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="me-2">
+                                        <?= $order[ 'distance' ] ?>
+                                    </span>
 
+                                    <a href="<?= viewGoogleMap($order[ 'latitude' ], $order[ 'longitude' ]) ?>"
+                                        class="rounded-circle action-icon bg-info text-white" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" data-bs-title="View Route Map" target="_blank">
+                                        <i class="mdi mdi-google-maps"></i>
+                                    </a>
+                                </div>
                             </td>
-                            <td><?= dateFormat($order['created_at']) ?></td>
+                            <td><?= dateFormat($order[ 'created_at' ]) ?></td>
 
-                            <td><?= RPformat($order['total_amount']) ?></td>
+                            <td><?= RPformat($order[ 'total_amount' ]) ?></td>
                             <td>
-                                <span class="text-primary"><?= $order['costumer_name']  ?></span>
+                                <span class="text-primary"><?= $order[ 'costumer_name' ] ?></span>
                             </td>
                             <td>
                                 <?php
-                                if (is_null($order['driver_id'])) :
-                                ?>
-                                    <button class="btn btn-danger btn-sm"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Assign Order to Driver"
-                                        onclick="assignToDriver(<?= $order['id'] ?> , <?= null ?>)">
+                                if (is_null($order[ 'driver_id' ])):
+                                    ?>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="Assign Order to Driver"
+                                        onclick="assignToDriver(<?= $order[ 'id' ] ?> , <?= null ?>)">
                                         <i class="mdi mdi-truck-delivery me-2"></i> Not Assign
                                     </button>
-                                <?php
-                                else :
-                                    $getDriver = $drivers->find($order['driver_id']);
-                                ?>
-                                    <button class="btn btn-success btn-sm"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Assign Order to Driver"
-                                        onclick="assignToDriver(<?= $order['id'] ?> , <?= $getDriver->id ?> )">
+                                    <?php
+                                else:
+                                    $getDriver = $drivers->find($order[ 'driver_id' ]);
+                                    ?>
+                                    <button class="btn btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="Assign Order to Driver"
+                                        onclick="assignToDriver(<?= $order[ 'id' ] ?> , <?= $getDriver->id ?> )">
                                         <i class="mdi mdi-truck-delivery me-2"></i> <?= $getDriver->name ?>
                                     </button>
-                                <?php
+                                    <?php
                                 endif;
                                 ?>
                             </td>
-                            <td><?= $order['payment_method'] ?></td>
+                            <td><?= $order[ 'payment_method' ] ?></td>
 
                             <td>
-                                <span class="badge p-1 bg-<?= confirmColor($order['is_confirm']) ?>"><?= $order['is_confirm'] ? 'Confirmed' : 'Not Confirmed' ?></span>
+                                <span
+                                    class="badge p-1 bg-<?= confirmColor($order[ 'is_confirm' ]) ?>"><?= $order[ 'is_confirm' ] ? 'Confirmed' : 'Not Confirmed' ?></span>
                             </td>
                             <td>
-                                <span ><?= $order['address'] ?></span>
+                                <span><?= $order[ 'address' ] ?></span>
                             </td>
                             <td>
-                                <span ><?= $order['latitude'] ?></span>
+                                <span><?= $order[ 'latitude' ] ?></span>
                             </td>
                             <td>
-                                <span ><?= $order['longitude'] ?></span>
+                                <span><?= $order[ 'longitude' ] ?></span>
                             </td>
                             <td class="table-action">
-                                <a href="/dashboard/order/detail?order_id=<?= $order['id'] ?>" class="action-icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Detail"> <i class="mdi mdi-eye"></i></a>
-                                <button class="btn action-icon" onclick="deleteOrder(<?= $order['id'] ?>)"
+                                <a href="/dashboard/order/detail?order_id=<?= $order[ 'id' ] ?>" class="action-icon"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Detail"> <i
+                                        class="mdi mdi-eye"></i></a>
+                                <button class="btn action-icon" onclick="deleteOrder(<?= $order[ 'id' ] ?>)"
                                     data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
                                     <i class="mdi mdi-delete"></i>
                                 </button>
@@ -130,14 +141,16 @@ $longitudeFrom = $metadata->get('office_longitude');
                         ?>
                         <select name="driver_id" id="driver_id" class="form-control" required>
                             <option value="">Select Driver</option>
-                            <?php foreach ($optionDriver as $driver) : ?>
-                                <option value="<?= $driver['id'] ?>"><?= ucwords($driver['name']) ?></option>
+                            <?php foreach ($optionDriver as $driver): ?>
+                                <option value="<?= $driver[ 'id' ] ?>"><?= ucwords($driver[ 'name' ]) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="text-end">
-                        <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal" aria-hidden="true">Assign</button>
-                        <button type="reset" class="btn btn-sm btn-danger" data-bs-dismiss="modal" aria-hidden="true">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal"
+                            aria-hidden="true">Assign</button>
+                        <button type="reset" class="btn btn-sm btn-danger" data-bs-dismiss="modal"
+                            aria-hidden="true">Cancel</button>
                     </div>
                 </form>
             </div>
@@ -158,7 +171,7 @@ $longitudeFrom = $metadata->get('office_longitude');
                     id: id
                 },
                 dataType: "json",
-                success: function(res) {
+                success: function (res) {
                     if (res.status == 'success') {
                         toastr.success(res.message);
                         setTimeout(() => {
@@ -168,7 +181,7 @@ $longitudeFrom = $metadata->get('office_longitude');
                         toastr.error(res.message);
                     }
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
+                error: function (jqXHR, textStatus, errorThrown) {
                     // Display a generic error message if available
                     toastr.error(jqXHR.responseJSON ? jqXHR.responseJSON.message : 'An error occurred');
 
@@ -191,7 +204,7 @@ $longitudeFrom = $metadata->get('office_longitude');
             $('#driver_id').val(driver);
         }
 
-        $('#assignDriverForm').submit(function(e) {
+        $('#assignDriverForm').submit(function (e) {
             e.preventDefault();
 
             let driver_id = $('#driver_id').val();
@@ -207,7 +220,7 @@ $longitudeFrom = $metadata->get('office_longitude');
                     driver_id: driver_id
                 },
                 dataType: "json",
-                success: function(res) {
+                success: function (res) {
                     if (res.status == 'success') {
                         toastr.success(res.message);
                         setTimeout(() => {
@@ -217,7 +230,7 @@ $longitudeFrom = $metadata->get('office_longitude');
                         toastr.error(res.message);
                     }
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
+                error: function (jqXHR, textStatus, errorThrown) {
                     // Display a generic error message if available
                     toastr.error(jqXHR.responseJSON ? jqXHR.responseJSON.message : 'An error occurred');
 
@@ -243,7 +256,7 @@ $longitudeFrom = $metadata->get('office_longitude');
                 status: newStatus
             },
             dataType: "json",
-            success: function(res) {
+            success: function (res) {
                 if (res.status == 'success') {
                     toastr.success(res.message);
                     setTimeout(() => {
@@ -253,7 +266,7 @@ $longitudeFrom = $metadata->get('office_longitude');
                     toastr.error(res.message);
                 }
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 // Display a generic error message if available
                 toastr.error(jqXHR.responseJSON ? jqXHR.responseJSON.message : 'An error occurred');
 

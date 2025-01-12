@@ -117,7 +117,7 @@
                         <div class="payment-info">
                             <h4 class="sub-title">Metode Pembayaran</h4>
                             <div class="payment-inner">
-                                <div class="option-block">
+                                <!-- <div class="option-block">
                                     <div class="custom-controls-stacked">
                                         <label class="custom-control material-checkbox">
                                             <input type="radio" class="material-control-input" value="transfer"
@@ -130,12 +130,12 @@
                                     <p>
                                         pembayaran via Transfer antar bank
                                     </p>
-                                </div>
+                                </div> -->
                                 <div class="option-block">
                                     <div class="custom-controls-stacked">
                                         <label class="custom-control material-checkbox">
                                             <input type="radio" class="material-control-input" name="payment_method"
-                                                value="cod">
+                                                value="cod" checked>
                                             <span class="material-control-indicator"></span>
                                             <span class="description">COD</span>
                                         </label>
