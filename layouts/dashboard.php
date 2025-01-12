@@ -16,13 +16,10 @@ admin_only();
     <link rel="shortcut icon" href="/assets/images/favicon.ico">
 
     <!-- Datatable css -->
-    <link href="/assets/hyper/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet"
-        type="text/css" />
-    <link href="/assets/hyper/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
-        type="text/css" />
+    <link href="/assets/hyper/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/hyper/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
     <!-- Theme Config Js -->
@@ -107,7 +104,7 @@ admin_only();
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             "use strict";
             $("#products-datatable").DataTable({
                 language: {
@@ -125,8 +122,8 @@ admin_only();
                 order: [
                     [1, "asc"]
                 ],
-                drawCallback: function () {
-                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#products-datatable_length label").addClass("form-label"), document.querySelector(".dataTables_wrapper .row").querySelectorAll(".col-md-6").forEach(function (e) {
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#products-datatable_length label").addClass("form-label"), document.querySelector(".dataTables_wrapper .row").querySelectorAll(".col-md-6").forEach(function(e) {
                         e.classList.add("col-sm-6"), e.classList.remove("col-sm-12"), e.classList.remove("col-md-6")
                     })
                 }
@@ -147,11 +144,9 @@ admin_only();
                 order: [
                     [1, "asc"]
                 ],
-                columnDefs: [
-                    { targets: 1, type: 'num' } 
-                ],
-                drawCallback: function () {
-                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#products-datatable_length label").addClass("form-label"), document.querySelector(".dataTables_wrapper .row").querySelectorAll(".col-md-6").forEach(function (e) {
+                
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#products-datatable_length label").addClass("form-label"), document.querySelector(".dataTables_wrapper .row").querySelectorAll(".col-md-6").forEach(function(e) {
                         e.classList.add("col-sm-6"), e.classList.remove("col-sm-12"), e.classList.remove("col-md-6")
                     })
                 }
@@ -172,8 +167,8 @@ admin_only();
                 order: [
                     [1, "asc"]
                 ],
-                drawCallback: function () {
-                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#products-datatable_length label").addClass("form-label"), document.querySelector(".dataTables_wrapper .row").querySelectorAll(".col-md-6").forEach(function (e) {
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#products-datatable_length label").addClass("form-label"), document.querySelector(".dataTables_wrapper .row").querySelectorAll(".col-md-6").forEach(function(e) {
                         e.classList.add("col-sm-6"), e.classList.remove("col-sm-12"), e.classList.remove("col-md-6")
                     })
                 }
@@ -194,8 +189,8 @@ admin_only();
                 order: [
                     [1, "asc"]
                 ],
-                drawCallback: function () {
-                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#products-datatable_length label").addClass("form-label"), document.querySelector(".dataTables_wrapper .row").querySelectorAll(".col-md-6").forEach(function (e) {
+                drawCallback: function() {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#products-datatable_length label").addClass("form-label"), document.querySelector(".dataTables_wrapper .row").querySelectorAll(".col-md-6").forEach(function(e) {
                         e.classList.add("col-sm-6"), e.classList.remove("col-sm-12"), e.classList.remove("col-md-6")
                     })
                 }

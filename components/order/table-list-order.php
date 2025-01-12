@@ -17,8 +17,8 @@ $longitudeFrom = $metadata->get('office_longitude');
             <table class="table table-centered  nowrap" id="orders-datatable">
                 <thead class="table-light">
                     <tr>
-                        <th></th>
                         <th>Distance</th>
+                        <th></th>
                         <th>Created At</th>
                         <th class="all">Total Amount</th>
                         <th>Costumer</th>
@@ -49,14 +49,7 @@ $longitudeFrom = $metadata->get('office_longitude');
                                 </div>
 
                             </td>
-                            <td>
-                                <span class="me-2">
-                                    <?= $order['distance'] ?> KM
-                                </span>
-                                <a href="<?= viewGoogleMap($order['latitude'], $order['longitude']) ?>" class=" rounded-circle action-icon bg-info text-white"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Route Map" target="_blank"> <i class="mdi mdi-google-maps"></i></a>
-
-                            </td>
+                            
                             <td><?= dateFormat($order['created_at']) ?></td>
 
                             <td><?= RPformat($order['total_amount']) ?></td>
