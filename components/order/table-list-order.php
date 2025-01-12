@@ -25,6 +25,9 @@ $longitudeFrom = $metadata->get('office_longitude');
                         <th>Driver</th>
                         <th>Payment Method</th>
                         <th>Is Confirm</th>
+                        <th>Address</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
                         <th style="width: 85px;">Action</th>
                     </tr>
                 </thead>
@@ -86,6 +89,15 @@ $longitudeFrom = $metadata->get('office_longitude');
 
                             <td>
                                 <span class="badge p-1 bg-<?= confirmColor($order['is_confirm']) ?>"><?= $order['is_confirm'] ? 'Confirmed' : 'Not Confirmed' ?></span>
+                            </td>
+                            <td>
+                                <span ><?= $order['address'] ?></span>
+                            </td>
+                            <td>
+                                <span ><?= $order['latitude'] ?></span>
+                            </td>
+                            <td>
+                                <span ><?= $order['longitude'] ?></span>
                             </td>
                             <td class="table-action">
                                 <a href="/dashboard/order/detail?order_id=<?= $order['id'] ?>" class="action-icon"

@@ -158,6 +158,19 @@ $order_item = $order_item->getByOrder($id);
                             <?= $order->address_detail ?>
                         </address>
                     </div>
+
+                     <div>
+                        <h5>Latitude </h5>
+                        <address class="mb-0 font-14 address-lg">
+                            <?= $order->latitude ?? '' ?>
+                        </address>
+                    </div>
+                     <div>
+                        <h5>Longitude </h5>
+                        <address class="mb-0 font-14 address-lg">
+                            <?= $order->longitude ?? '' ?>
+                        </address>
+                    </div>
                 </div>
             </div>
         </div>
