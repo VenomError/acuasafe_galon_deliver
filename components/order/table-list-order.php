@@ -17,8 +17,8 @@ $longitudeFrom = $metadata->get('office_longitude');
             <table class="table table-centered  nowrap" id="orders-datatable">
                 <thead class="table-light">
                     <tr>
-                        <th>Distance</th>
                         <th></th>
+                        <th>Distance</th>
                         <th>Created At</th>
                         <th class="all">Total Amount</th>
                         <th>Costumer</th>
