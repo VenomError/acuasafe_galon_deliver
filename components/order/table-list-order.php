@@ -74,7 +74,7 @@ foreach ($data as $order) {
                                     </a>
                                 </div>
                             </td>
-                            <td><?= dateFormat($order[ 'created_at' ]) ?></td>
+                            <td><?= dateFormat($order[ 'created_at' ] ,   'd M, Y ') ?></td>
 
                             <td><?= RPformat($order[ 'total_amount' ]) ?></td>
                             <td>
