@@ -9,6 +9,14 @@ $metadata = new Metadata();
 
 $latitudeFrom = $metadata->get('office_latitude');
 $longitudeFrom = $metadata->get('office_longitude');
+
+$markers = [];
+foreach ($data as $order) {
+    $markers[] = [
+        'lat' => $order[ 'latitude' ],
+        'lng' => $order[ 'longitude' ],
+    ];
+}
 ?>
 <div class="card">
     <div class="card-body">
@@ -125,6 +133,12 @@ $longitudeFrom = $metadata->get('office_longitude');
         </div>
     </div> <!-- end card-body-->
 </div> <!-- end card-->
+
+<div class="col-12">
+    <?= component('map_many', [
+        'markers' => $markers
+    ]) ?>
+</div>
 
 <div class="modal fade" id="assignDriverModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
