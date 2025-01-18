@@ -145,9 +145,8 @@ admin_only();
                     style: "multi"
                 },
                 order: [
-                    [1, "asc"],
-                    [2, "asc"]
-
+                    [2, "desc"], // Created_at column in descending order
+                    [1, "asc"] // Distance column in ascending order
                 ],
 
                 drawCallback: function () {
