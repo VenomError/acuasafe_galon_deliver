@@ -11,9 +11,7 @@ $data = $costumer->all();
         <div class="row mb-2">
             <div class="col-sm-5">
             </div>
-            <div class="col-sm-7 text-end">
-                <a href="/dashboard/product/create_product" class="btn btn-primary mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Costumer</a>
-            </div><!-- end col-->
+            
         </div>
 
         <div class="table-responsive">
